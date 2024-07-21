@@ -12,7 +12,7 @@ MAIN_TEMPLATE = """
 {target_code}
 
 if __name__ == '__main__':
-    inputs = [eval(f"[{i}]") for i in {input_array}]
+{input_line}
     i = 0
 
     while(True):
@@ -51,13 +51,12 @@ def get_code_inputs(df, id):
         if 'inputs' in line:
             input_line = line
             break
-    test_values = process_input_line(input_line)
-    return test_function, test_values
+    return test_function, input_line
 
 
 def generate_code(function, code, inputs):
     return MAIN_TEMPLATE.format(target_code=code, target_name=function, 
-                                input_array=inputs, i='{i}')
+                                input_line=inputs)
 
 
 def export_python_file(output_folder, llm, id, contents):
