@@ -1,10 +1,14 @@
 #!/bin/bash
 
-dirs=(`ls ./timings/`)
+llms=(`ls ./timings/`)
 
-for dir in ${dirs[*]}
+for llm in ${llms[*]}
 do
-    echo $dir
+    problems=(`ls ./timings/${llm}`)
+    for problem in ${problems[*]}
+    do
+        echo $problem
+    done
 
 done
 
