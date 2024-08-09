@@ -26,5 +26,7 @@ do
         done
         echo >> ./timings/times.csv
     done
+    git add . && git commit -m "${llm} 1000 runs done" && git push
 done
+
 
