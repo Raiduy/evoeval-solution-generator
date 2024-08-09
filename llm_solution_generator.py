@@ -72,7 +72,7 @@ def get_code_inputs(df, id):
     return test_function, input_array
 
 
-def generate_code(function, code, inputs, executions = 1):
+def generate_code(function, code, inputs, executions = 1000):
     return CODE_TEMPLATE.format(target_code=code, target_name=function, 
                                 input_line=inputs,
                                 number_of_executions=executions)
@@ -87,30 +87,7 @@ def export_python_file(output_folder, llm, id, contents):
     return path
 
 
-def get_num_exec(code_path):
-    time_cmd = f'time python3 {code_path}'
-
-    runtimes = []
-
-    for i in range(30):
-        _, err = subprocess.Popen(['bash', '-c', time_cmd],
-                                    stdout=subprocess.PIPE, 
-                                    stderr=subprocess.PIPE).communicate()
-        time = err.decode('utf-8').split('real')[1]
-        time = time.split('\n')[0].strip()
-        minutes = time.split('m')[0]
-        seconds = time.split('m')[1].split('s')[0]
-        seconds = 60 * int(minutes) + float(seconds)
-        runtimes.append(seconds)
-
-    seconds = statistics.median(runtimes)
-    repetitions = MAX_RUNTIME_S / seconds
-    repetitions = int(repetitions)
-    print(code_path, ',', seconds)
-    return repetitions
-
-
-def process_llms(solutions_folder, all_llms, timings_folder, output_folder):
+def process_llms(solutions_folder, all_llms, timings_folder):
     df = get_dataset()
     for id in EVOEVAL_DIFFICULT_IDS:
         function, inputs = get_code_inputs(df, id)
@@ -121,9 +98,6 @@ def process_llms(solutions_folder, all_llms, timings_folder, output_folder):
                 code = reader.read()
             runnable_code = generate_code(function, code, inputs)
             export_path = export_python_file(timings_folder, llm, id, runnable_code)
-            num_of_executions = get_num_exec(export_path)
-            final_code = generate_code(function, code, inputs, num_of_executions)
-            export_python_file(output_folder, llm, id, final_code)
             #break
         #break
 
@@ -131,9 +105,8 @@ def process_llms(solutions_folder, all_llms, timings_folder, output_folder):
 if __name__ == '__main__':
     solutions_folder = sys.argv[1] # SOLUTIONS_FOLDER
     timings_folder = sys.argv[2] # TIMINGS_FOLDER
-    output_folder = sys.argv[3] # OUTPUT_FOLDER
 
     all_llms = os.listdir(solutions_folder)
 
-    process_llms(solutions_folder, all_llms, timings_folder, output_folder)
+    process_llms(solutions_folder, all_llms, timings_folder)
     

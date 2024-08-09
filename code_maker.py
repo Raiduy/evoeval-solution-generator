@@ -100,7 +100,8 @@ def get_num_exec(path, llm, problem):
                 seconds = float(field[1].split('s')[0])
                 runtimes.append(minutes + seconds)
     
-    repetitions = int(MAX_RUNTIME_S / statistics.median(runtimes))
+    per_run = statistics.median(runtimes) / 1000
+    repetitions = int(MAX_RUNTIME_S / per_run)
     print(f'{llm}/{problem}  {repetitions}')
     return repetitions
 
