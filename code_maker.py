@@ -8,7 +8,6 @@ import time
 
 
 SOLUTIONS_FOLDER = './solutions/'
-TIMINGS_FOLDER = './timings/'
 OUTPUT_FOLDER = './code/'
 EVOEVAL_DIFFICULT_IDS = ['4', '61', '79', '63', '90', '53', '66', '52', '16']
 
@@ -87,26 +86,22 @@ def export_python_file(output_folder, llm, id, contents):
     return path
 
 
-def get_num_exec(code_path):
-    time_cmd = f'time python3 {code_path}'
+def get_num_exec(path, llm, problem):
+    with open(f'{path}/times.csv') as f:
+        lines = f.readlines()
 
     runtimes = []
-
-    for i in range(30):
-        _, err = subprocess.Popen(['bash', '-c', time_cmd],
-                                    stdout=subprocess.PIPE, 
-                                    stderr=subprocess.PIPE).communicate()
-        time = err.decode('utf-8').split('real')[1]
-        time = time.split('\n')[0].strip()
-        minutes = time.split('m')[0]
-        seconds = time.split('m')[1].split('s')[0]
-        seconds = 60 * int(minutes) + float(seconds)
-        runtimes.append(seconds)
-
-    seconds = statistics.median(runtimes)
-    repetitions = MAX_RUNTIME_S / seconds
-    repetitions = int(repetitions)
-    print(code_path, ',', seconds)
+    for line in lines:
+        if f'{llm}/{problem}' in line:
+            fields = line.split(', ')
+            for i in range(1, 31):
+                field = fields[i].split('m')
+                minutes = 60 * int(field[0])
+                seconds = float(field[1].split('s')[0])
+                runtimes.append(minutes + seconds)
+    
+    repetitions = int(MAX_RUNTIME_S / statistics.median(runtimes))
+    print(f'{llm}/{problem}  {repetitions}')
     return repetitions
 
 
@@ -119,9 +114,7 @@ def process_llms(solutions_folder, all_llms, timings_folder, output_folder):
             code_path = f"{solutions_folder}{llm}/{llm}/EvoEval_difficult/EvoEval_{id}/0.py"
             with open(code_path) as reader:
                 code = reader.read()
-            runnable_code = generate_code(function, code, inputs)
-            export_path = export_python_file(timings_folder, llm, id, runnable_code)
-            num_of_executions = get_num_exec(export_path)
+            num_of_executions = get_num_exec(timings_folder, llm, id)
             final_code = generate_code(function, code, inputs, num_of_executions)
             export_python_file(output_folder, llm, id, final_code)
             #break
@@ -136,4 +129,4 @@ if __name__ == '__main__':
     all_llms = os.listdir(solutions_folder)
 
     process_llms(solutions_folder, all_llms, timings_folder, output_folder)
-    
+ 
