@@ -19,5 +19,6 @@ do
         time_output=(`{ time python3 ./code/${llm}/${problem}; } |& grep real`)
         echo ${llm}/${problem}, ${time_output[1]} >> ./code/times.csv
     done
+    git add . && git commit -m "${llm} 1000 runs done" && git push
 done
 
