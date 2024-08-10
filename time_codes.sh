@@ -15,6 +15,12 @@ do
     problems=(`ls ./code/${llm}`)
     for problem in ${problems[*]}
     do
+        if [[ "$llm" == "deepseek-coder-33b-instruct_temp_0.0" && "$problem" == "63.py" ]]
+        then
+            echo "DS 63 found"
+            continue 1
+        fi
+
         echo "Processing ${llm}/${problem}"
         time_output=(`{ time python3 ./code/${llm}/${problem}; } |& grep real`)
         echo ${llm}/${problem}, ${time_output[1]} >> ./code/times.csv
