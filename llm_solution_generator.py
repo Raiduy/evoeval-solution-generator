@@ -92,11 +92,15 @@ def process_llms(solutions_folder, all_llms, timings_folder):
     for id in EVOEVAL_DIFFICULT_IDS:
         function, inputs = get_code_inputs(df, id)
         
+        exec = 1_000
+        if id not in ['16', '61', '66']:
+            exec = 1_000_000
+        
         for llm in all_llms:
             code_path = f"{solutions_folder}{llm}/{llm}/EvoEval_difficult/EvoEval_{id}/0.py"
             with open(code_path) as reader:
                 code = reader.read()
-            runnable_code = generate_code(function, code, inputs)
+            runnable_code = generate_code(function, code, inputs, exec)
             export_path = export_python_file(timings_folder, llm, id, runnable_code)
             #break
         #break

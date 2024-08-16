@@ -102,7 +102,10 @@ def get_num_exec(path, llm, problem):
                 tmp.append(minutes + seconds)
         runtimes.extend(tmp)
     
-    per_run = statistics.median(runtimes) / 1000
+    execs = 1_000
+    if problem not in ['16', '61', '66']:
+        execs = 1_000_000
+    per_run = statistics.median(runtimes) / execs
     repetitions = int(MAX_RUNTIME_S / per_run)
     print(f'{llm}/{problem}  {repetitions}')
     return repetitions
