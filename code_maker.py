@@ -11,7 +11,7 @@ SOLUTIONS_FOLDER = './solutions/'
 OUTPUT_FOLDER = './code/'
 EVOEVAL_DIFFICULT_IDS = ['4', '61', '79', '63', '90', '53', '66', '52', '16']
 
-MAX_RUNTIME_S = 300
+MAX_RUNTIME_S = 180
 
 CODE_TEMPLATE = """
 {target_code}
@@ -92,13 +92,15 @@ def get_num_exec(path, llm, problem):
 
     runtimes = []
     for line in lines:
-        if f'{llm}/{problem}' in line:
+        tmp = []
+        if f'{problem}.py' in line:
             fields = line.split(', ')
             for i in range(1, 31):
                 field = fields[i].split('m')
                 minutes = 60 * int(field[0])
                 seconds = float(field[1].split('s')[0])
-                runtimes.append(minutes + seconds)
+                tmp.append(minutes + seconds)
+        runtimes.extend(tmp)
     
     per_run = statistics.median(runtimes) / 1000
     repetitions = int(MAX_RUNTIME_S / per_run)
