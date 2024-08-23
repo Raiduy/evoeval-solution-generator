@@ -103,7 +103,7 @@ def get_num_exec(path, llm, problem):
         runtimes.extend(tmp)
     
     execs = 100
-    if problem in ['16', '61', '63', '66', '90']:
+    if problem in ['16', '66']:
         execs = 10
         print(problem, 'hit')
     per_run = statistics.mean(runtimes) / execs
