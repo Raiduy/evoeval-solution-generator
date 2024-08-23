@@ -92,8 +92,8 @@ def process_llms(solutions_folder, all_llms, timings_folder):
     for id in EVOEVAL_DIFFICULT_IDS:
         function, inputs = get_code_inputs(df, id)
         
-        exec = 100
-        if id in ['16', '61', '63', '66', '90']:
+        exec = 1000
+        if id in ['16', '66']:
             exec = 10
             print(id, 'hit')
 
