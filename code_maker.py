@@ -102,7 +102,7 @@ def get_num_exec(path, llm, problem):
                 tmp.append(minutes + seconds)
         runtimes.extend(tmp)
     
-    execs = 100
+    execs = 10
     if problem in ['16', '66']:
         execs = 10
         print(problem, 'hit')
