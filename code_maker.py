@@ -104,7 +104,7 @@ def get_num_exec(path, llm, problem):
     
     execs = 1_000_000
     if problem in ['16', '61', '63', '66', '90']:
-        execs = 1_000
+        execs = 1_000_000
         print(problem, 'hit')
     per_run = statistics.mean(runtimes) / execs
     repetitions = int(MAX_RUNTIME_S / per_run)

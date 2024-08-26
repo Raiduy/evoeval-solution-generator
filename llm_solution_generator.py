@@ -94,7 +94,7 @@ def process_llms(solutions_folder, all_llms, timings_folder):
         
         exec = 1_000_000
         if id in ['16', '61', '63', '66', '90']:
-            exec = 1_000
+            exec = 1_000_000
             print(id, 'hit')
 
         for llm in all_llms:
