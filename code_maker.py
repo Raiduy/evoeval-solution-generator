@@ -121,6 +121,8 @@ def process_llms(solutions_folder, all_llms, timings_folder, output_folder):
             code_path = f"{solutions_folder}{llm}/{llm}/EvoEval_difficult/EvoEval_{id}/0.py"
             with open(code_path) as reader:
                 code = reader.read()
+                #code = code.split(':\n')[0] + ':\n\tpass'
+                #print(code)
             num_of_executions = get_num_exec(timings_folder, llm, id)
             final_code = generate_code(function, code, inputs, num_of_executions)
             export_python_file(output_folder, llm, id, final_code)
