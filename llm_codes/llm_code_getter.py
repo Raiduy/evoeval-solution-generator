@@ -14,6 +14,8 @@ inference_endpoints = {
 
 #endpoint = get_inference_endpoint(inference_endpoints['code-millenials'])
 def preprocess_response(llm, response):
+    if llm == 'GPT':
+        response = response.split('```python')[1].split('```')[0]
     return response
 
 def write_to_file(llm, experiment, code_id, response):
@@ -30,7 +32,7 @@ def openAI_call(sys_prompt, problem_id, user_prompt):
     openai_key = os.getenv('openAI_api_key')
     client = OpenAI(api_key = openai_key)
     response = client.chat.completions.create(
-        model="gpt-4-turbo-preview",
+        model="gpt-4",
         messages=[
             {
                 "role": "system",
