@@ -114,6 +114,7 @@ def get_num_exec(path, llm, problem):
 
 def process_llms(solutions_folder, all_llms, timings_folder, output_folder):
     df = get_dataset()
+    num_exec_df = pd.DataFrame()
     for id in EVOEVAL_DIFFICULT_IDS:
         function, inputs = get_code_inputs(df, id)
         
@@ -122,11 +123,15 @@ def process_llms(solutions_folder, all_llms, timings_folder, output_folder):
             with open(code_path) as reader:
                 code = reader.read()
             num_of_executions = get_num_exec(timings_folder, llm, id)
+            tmp = pd.DataFrame({'id': id, 'num_of_executions': num_of_executions}, index=[0])
+            num_exec_df = pd.concat([num_exec_df, tmp])
+
             final_code = generate_code(function, code, inputs, num_of_executions)
             export_python_file(output_folder, llm, id, final_code)
             #break
         #break
-
+    num_exec_df = num_exec_df.drop_duplicates()
+    num_exec_df.to_csv('./rpi/num_exec.csv', index=False)
 
 if __name__ == '__main__':
     solutions_folder = sys.argv[1] # SOLUTIONS_FOLDER
