@@ -1,0 +1,19 @@
+
+    if s == 'below':
+        for i in range(len(l)):
+            if l[i] >= t1:
+                return i
+        return True
+    elif s == 'above':
+        for i in range(len(l)):
+            if l[i] <= t2:
+                return i
+        return True
+    else:
+        return -1
+
+
+print(below_above_threshold([1, 2, 4, 10], 100, 0, 'below'))
+print(below_above_threshold([1, 20, 4, 10], 5, 0, 'below'))
+print(below_above_threshold([1, 20, 4, 10], 5, 0, 'above'))
+print(below_above_threshold([10, 20, 30, 40], 5, 15, 'above'))

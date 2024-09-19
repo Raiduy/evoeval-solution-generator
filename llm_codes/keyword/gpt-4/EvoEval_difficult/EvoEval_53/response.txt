@@ -1,0 +1,12 @@
+Here is the Python code that fulfills your request:
+
+```python
+def add_elements(list1: list, list2: list, index: int) -> tuple:
+    try:
+        result = list1[index] + list2[index]
+        return result, False
+    except IndexError:
+        return None, True
+```
+
+This function tries to add elements from `list1` and `list2` at the specified `index`. If the index is out of range for either of the lists, it catches the `IndexError` exception and returns `None` for the result and `True` for the exception occurrence. If the addition is successful, it returns the result and `False` for the exception occurrence. This function is energy efficient as it only performs the necessary operations and handles exceptions properly.

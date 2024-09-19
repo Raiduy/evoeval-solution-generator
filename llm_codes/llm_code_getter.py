@@ -1,5 +1,6 @@
 import os
 import json
+import sys
 
 from huggingface_hub import get_inference_endpoint, list_inference_endpoints, AsyncInferenceClient
 from openai import OpenAI
@@ -7,32 +8,63 @@ from dotenv import load_dotenv
 
 load_dotenv('.env')
 
-inference_endpoints = {
+models = {
     'code-millenials': "code-millenials-34b-utk",
-    'codellama': "speechless-codellama-34b-llm-exp"
+    'speechless-codellama': "speechless-codellama-34b-llm-exp",
+    'gpt-4': "gpt-4",
 }
 
-#endpoint = get_inference_endpoint(inference_endpoints['code-millenials'])
-def preprocess_response(llm, response):
-    if llm == 'GPT':
+
+def preprocess_response(llm, response, user_prompt=None):
+    if llm == 'gpt-4':
         response = response.split('```python')[1].split('```')[0]
+    elif llm == 'code-millenials':
+        response = user_prompt + '\n' + response.split('if __name__')[0]
+    elif llm == 'speechless-codellama':
+        response = user_prompt + '\n' + response
     return response
 
-def write_to_file(llm, experiment, code_id, response):
+
+def write_to_file(llm, experiment, code_id, response, user_prompt=None):
     out_folder = f'./{experiment}/{llm}/EvoEval_difficult/EvoEval_{code_id}'
     if not os.path.isdir(out_folder):
         os.makedirs(out_folder)
-    code = preprocess_response(llm, response)
+
+    with open(f'{out_folder}/response.txt', 'w') as w:
+        w.write(response)
+
+    code = preprocess_response(llm, response, user_prompt)
+
     with open(f'{out_folder}/0.py', 'w') as writer:
         writer.write(code)
     print("Written problem", code_id)
 
 
-def openAI_call(sys_prompt, problem_id, user_prompt):
+def huggingface_call(model, sys_prompt, problem_id, user_prompt):
+    endpoint = get_inference_endpoint(models[model])
+    messages=[
+            {
+                "role": "system",
+                "content": sys_prompt
+            },
+            {
+                "role": "user",
+                "content": user_prompt
+            }
+    ]
+
+    response = endpoint.client.text_generation(user_prompt,
+                                             stop_sequences=["\\end{code}"],
+                                             max_new_tokens=1200)
+    write_to_file(model, experiment, problem_id, response, user_prompt)
+
+
+def openAI_call(model, sys_prompt, problem_id, user_prompt):
     openai_key = os.getenv('openAI_api_key')
     client = OpenAI(api_key = openai_key)
+
     response = client.chat.completions.create(
-        model="gpt-4",
+        model=models[model],
         messages=[
             {
                 "role": "system",
@@ -47,27 +79,26 @@ def openAI_call(sys_prompt, problem_id, user_prompt):
         #max_tokens=256,
     )
     
-    resp = response.choices[0].message.content#.split('\\begin{code}')[1].split('\\end{code}')[0]
-    write_to_file("GPT", "keyword", problem_id, resp)
+    response = response.choices[0].message.content
+    write_to_file(model, experiment, problem_id, response)
 
 
 if __name__ == '__main__':
-    #result = endpoint.client.text_generation("How do you make a for loop in python?",
-    #                                         stop_sequences=["\end{code}"],
-    #                                         max_new_tokens=1400)
-
-    #with open('./test.txt', 'w') as f:
-    #    f.write(resp)
-    #get_response()
-    #print(result)
     with open('./relevant_name.json', 'r') as file:
         data = json.load(file)
-    
-    sys_prompt = data["system_prompt"]["keyword"]
+    experiment = sys.argv[1]
+    llm = sys.argv[2]
+    sys_prompt = data["system_prompt"][experiment]
 
     for problem in data["user_prompt"]:
         user_prompt = data["user_prompt"][problem]
         print("Processing", problem)
-        openAI_call(sys_prompt, problem, user_prompt)
+        if ("gpt" in llm) or ("GPT" in llm):
+            print("OpenAI call")
+            openAI_call(llm, sys_prompt, problem, user_prompt)
+        else:
+            print("HuggingFace call")
+            huggingface_call(llm, sys_prompt, problem, user_prompt)
+
 
 

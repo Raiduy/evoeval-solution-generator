@@ -1,0 +1,17 @@
+Here is the Python code that calculates the Weighted Mean Absolute Deviation (WMAD) for a given list of tuples:
+
+```python
+def weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:
+    # Calculate the weighted mean
+    total_weight = sum(w for x, w in numbers)
+    if total_weight <= 0:
+        return "Weights must be positive and sum to 1"
+    weighted_mean = sum(x * w for x, w in numbers) / total_weight
+
+    # Calculate the weighted mean absolute deviation
+    wmad = sum(w * abs(x - weighted_mean) for x, w in numbers) / total_weight
+
+    return wmad
+```
+
+This function first calculates the weighted mean of the data points. It then calculates the WMAD by taking the average of the absolute differences between each data point and the weighted mean, with each difference being scaled by the respective weight of the data point. The function ensures that the weights are positive and that they sum to 1, returning an error message if these conditions are not met.

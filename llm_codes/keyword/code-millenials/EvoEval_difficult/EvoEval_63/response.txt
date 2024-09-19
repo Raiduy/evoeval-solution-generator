@@ -1,0 +1,18 @@
+
+    a, b, c = startSequence
+    if n == 0:
+        return a
+    elif n == 1:
+        return b
+    elif n == 2:
+        return c
+    else:
+        for i in range(3, n+1):
+            a, b, c = b, c, a+b+c
+            if c > p:
+                return 'Limit Exceeded'
+        return c
+
+print(customFibFib(1, [1, 1, 2], 1000))
+print(customFibFib(5, [-1, 0, 1], 1000))
+print(customFibFib(8, [0, 1, 2], 5))
