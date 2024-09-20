@@ -1,0 +1,24 @@
+Here is the code for the `count_distinct_characters_substrings` function that is energy efficient:
+
+```python
+from collections import defaultdict
+
+def count_distinct_characters_substrings(string: str, length: int) -> dict:
+    if length > len(string):
+        return {}
+
+    result = defaultdict(int)
+    for i in range(len(string) - length + 1):
+        substring = string[i:i+length]
+        distinct_chars = len(set(substring))
+        result[substring] = distinct_chars
+
+    return result
+
+# Test cases
+print(count_distinct_characters_substrings('xyzXYZabc', 3))
+print(count_distinct_characters_substrings('Jerry', 2))
+print(count_distinct_characters_substrings('Jerry', 6))
+```
+
+This code efficiently calculates the count of distinct characters in substrings of a given length in the input string. It uses a `defaultdict` to store the results and avoids unnecessary computations when the length is greater than the string length.

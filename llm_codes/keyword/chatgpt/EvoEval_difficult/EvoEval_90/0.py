@@ -1,0 +1,32 @@
+
+def next_smallest_and_largest(lst):
+    if len(lst) < 2:
+        return (None, None)
+
+    smallest = second_smallest = float('inf')
+    largest = second_largest = float('-inf')
+
+    for num in lst:
+        if num < smallest:
+            second_smallest = smallest
+            smallest = num
+        elif num < second_smallest and num != smallest:
+            second_smallest = num
+
+        if num > largest:
+            second_largest = largest
+            largest = num
+        elif num > second_largest and num != largest:
+            second_largest = num
+
+    if second_smallest == float('inf') or second_largest == float('-inf'):
+        return (None, None)
+    else:
+        return (second_smallest, second_largest)
+
+# Test cases
+print(next_smallest_and_largest([1, 2, 3, 4, 5]))  # Output: (2, 4)
+print(next_smallest_and_largest([5, 1, 4, 3, 2]))  # Output: (2, 4)
+print(next_smallest_and_largest([]))  # Output: (None, None)
+print(next_smallest_and_largest([1, 1]))  # Output: (None, None)
+print(next_smallest_and_largest([-1, -2, -3, -4, -5]))  # Output: (-4, -2)

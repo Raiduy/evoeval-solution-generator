@@ -12,16 +12,25 @@ models = {
     'code-millenials': "code-millenials-34b-utk",
     'speechless-codellama': "speechless-codellama-34b-llm-exp",
     'gpt-4': "gpt-4",
+    'chatgpt': "gpt-3.5-turbo",
 }
+
+hf_prompt_template = """{sys_prompt}
+
+### Instruction: {user_prompt}
+
+### Response:
+"""
 
 
 def preprocess_response(llm, response, user_prompt=None):
-    if llm == 'gpt-4':
+    if '```python' in response:
         response = response.split('```python')[1].split('```')[0]
-    elif llm == 'code-millenials':
-        response = user_prompt + '\n' + response.split('if __name__')[0]
-    elif llm == 'speechless-codellama':
-        response = user_prompt + '\n' + response
+    else:
+        if llm == 'code-millenials':
+            response = user_prompt + '\n' + response.split('if __name__')[0]
+        elif llm == 'speechless-codellama':
+            response = user_prompt + '\n' + response
     return response
 
 
@@ -52,10 +61,18 @@ def huggingface_call(model, sys_prompt, problem_id, user_prompt):
                 "content": user_prompt
             }
     ]
+    if model == 'code-millenials':
+        messages = hf_prompt_template.format(sys_prompt=sys_prompt, 
+                                             user_prompt=user_prompt)
+    elif model == 'speechless-codellama':
+        messages = hf_prompt_template.format(sys_prompt=sys_prompt, 
+                                             user_prompt='\n'+user_prompt)
 
-    response = endpoint.client.text_generation(user_prompt,
-                                             stop_sequences=["\\end{code}"],
-                                             max_new_tokens=1200)
+
+
+    response = endpoint.client.text_generation(messages,
+                                             max_new_tokens=1200,
+                                             temperature=0.01)
     write_to_file(model, experiment, problem_id, response, user_prompt)
 
 

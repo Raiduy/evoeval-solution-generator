@@ -1,8 +1,13 @@
+ Here is a Python solution for the problem:
 
+```python
+def add_elements(list1: list, list2: list, index: int):
     try:
         return list1[index] + list2[index], False
     except IndexError:
         return None, True
+```
 
-print(add_elements([1, 2, 3], [4, 5, 6], 1))
-print(add_elements([10, 20, 30], [40, 50], 2))
+This function tries to add the elements at the specified index in both lists. If the index is out of range for one of the lists, an `IndexError` is raised, which we catch and return `None` as the addition result, and `True` as the boolean indicating that an exception occurred. If no exception occurs, we return the addition result and `False`.
+
+Please note that the Python list indexing starts from 0. So, if you want to add the first elements of each list, you should pass 0 as the index.

@@ -1,4 +1,7 @@
+Here's the code that meets your requirements:
 
+```python
+def below_above_threshold(l: list, t1: int, t2: int, s: str) -> Union[bool, int]:
     if s == 'below':
         for i, num in enumerate(l):
             if num >= t1:
@@ -11,3 +14,8 @@
         return True
     else:
         return -1
+```
+
+This code uses a for loop to iterate through the list `l` and check if each element is below or above the respective threshold. If any element violates the condition, the function returns the index of the first violating element. If all elements meet the condition, the function returns `True`. If `s` is neither `'below'` nor `'above'`, the function returns `-1`.
+
+The `Union` type hint is used to indicate that the function can return either a boolean or an integer.

@@ -1,18 +1,23 @@
+ Here is a Python solution that uses dynamic programming to efficiently compute the n-th element of the CustomFibFib sequence:
 
-    a, b, c = startSequence
-    if n == 0:
-        return a
-    elif n == 1:
-        return b
-    elif n == 2:
-        return c
-    else:
-        for i in range(3, n+1):
-            a, b, c = b, c, a+b+c
-            if c > p:
-                return 'Limit Exceeded'
-        return c
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    if n < 3:
+        return startSequence[n]
 
-print(customFibFib(1, [1, 1, 2], 1000))
-print(customFibFib(5, [-1, 0, 1], 1000))
-print(customFibFib(8, [0, 1, 2], 5))
+    sequence = startSequence[:]
+
+    for i in range(3, n+1):
+        next_value = sequence[i-1] + sequence[i-2] + sequence[i-3]
+        if next_value > p:
+            return 'Limit Exceeded'
+        sequence.append(next_value)
+
+    return sequence[-1]
+```
+
+This function first checks if the requested index `n` is less than 3. If it is, it returns the `n-th` value from the starting sequence.
+
+If `n` is 3 or greater, it creates a new list `sequence` that is a copy of the starting sequence. It then iterates from 3 to `n` (inclusive), computing the next value in the sequence as the sum of the previous three values. If the next value exceeds the limit `p`, it immediately returns 'Limit Exceeded'. Otherwise, it appends the next value to the sequence.
+
+Finally, it returns the last value computed, which is the `n-th` value of the CustomFibFib sequence.

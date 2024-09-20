@@ -1,17 +1,12 @@
+ Here is a Python solution for the problem:
 
-    ascii_sum_s = 0
-    ascii_sum_t = 0
-    for char in s:
-        if char.isupper():
-            ascii_sum_s += ord(char)
-    for char in t:
-        if char.islower():
-            ascii_sum_t += ord(char)
-    return (ascii_sum_s, ascii_sum_t)
+```python
+def advancedDigitSum(s, t):
+    sum_s = sum(ord(c) for c in s if c.isupper())
+    sum_t = sum(ord(c) for c in t if c.islower())
+    return (sum_s, sum_t)
+```
 
-print(advancedDigitSum("", "abc")) # => (0, 294)
-print(advancedDigitSum("abAB", "abc")) # => (131, 294)
-print(advancedDigitSum("abcCd", "")) # => (67, 0)
-print(advancedDigitSum("helloE", "abc")) # => (69, 294)
-print(advancedDigitSum("woArBld", "xyz")) # => (131, 363)
-print(advancedDigitSum("aAaaaXa", ",.!")) # => (153, 0)
+This function uses Python's built-in `ord` function to get the ASCII value of a character. The `isupper` and `islower` methods are used to check if a character is uppercase or lowercase, respectively. The function then returns a tuple with the ASCII sums for 's' and 't'.
+
+This solution is efficient because it only iterates over the characters in 's' and 't' once each. The time complexity is O(n), where n is the length of the longer string. The space complexity is O(1), as the function only uses a fixed amount of space to store the ASCII sums.

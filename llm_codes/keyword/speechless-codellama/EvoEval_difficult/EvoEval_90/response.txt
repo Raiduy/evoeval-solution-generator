@@ -1,19 +1,29 @@
+Here's the code that meets the requirements you specified:
 
-
-    smallest = largest = None
-    second_smallest = second_largest = None
+```python
+def next_smallest_and_largest(lst):
+    smallest = float('inf')
+    second_smallest = float('inf')
+    largest = float('-inf')
+    second_largest = float('-inf')
 
     for num in lst:
-        if smallest is None or num < smallest:
+        if num < smallest:
             second_smallest = smallest
             smallest = num
-        elif second_smallest is None or num < second_smallest and num != smallest:
+        elif num < second_smallest and num != smallest:
             second_smallest = num
 
-        if largest is None or num > largest:
+        if num > largest:
             second_largest = largest
             largest = num
-        elif second_largest is None or num > second_largest and num != largest:
+        elif num > second_largest and num != largest:
             second_largest = num
 
-    return (second_smallest, second_largest)
+    if smallest == float('inf') or second_smallest == float('inf') or largest == float('-inf') or second_largest == float('-inf'):
+        return (None, None)
+    else:
+        return (second_smallest, second_largest)
+```
+
+This function iterates through the list once and keeps track of the smallest, second smallest, largest, and second largest elements. It then returns a tuple of the second smallest and second largest elements, or None if there are not enough unique elements in the list.
