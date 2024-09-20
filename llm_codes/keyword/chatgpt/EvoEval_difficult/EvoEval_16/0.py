@@ -13,7 +13,3 @@ def count_distinct_characters_substrings(string: str, length: int) -> dict:
 
     return result
 
-# Test cases
-print(count_distinct_characters_substrings('xyzXYZabc', 3))
-print(count_distinct_characters_substrings('Jerry', 2))
-print(count_distinct_characters_substrings('Jerry', 6))

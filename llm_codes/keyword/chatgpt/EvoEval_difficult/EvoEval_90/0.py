@@ -24,9 +24,4 @@ def next_smallest_and_largest(lst):
     else:
         return (second_smallest, second_largest)
 
-# Test cases
-print(next_smallest_and_largest([1, 2, 3, 4, 5]))  # Output: (2, 4)
-print(next_smallest_and_largest([5, 1, 4, 3, 2]))  # Output: (2, 4)
-print(next_smallest_and_largest([]))  # Output: (None, None)
-print(next_smallest_and_largest([1, 1]))  # Output: (None, None)
-print(next_smallest_and_largest([-1, -2, -3, -4, -5]))  # Output: (-4, -2)
+

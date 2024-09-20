@@ -14,6 +14,3 @@ def weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> floa
     return wmad
 
 
-# Example usage
-result = weighted_mean_absolute_deviation([(1.0, 0.1), (2.0, 0.2), (3.0, 0.3), (4.0, 0.4)])
-print(result)

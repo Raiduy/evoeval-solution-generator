@@ -18,7 +18,3 @@ def customFibFib(n: int, startSequence: list, p: int):
     
     return fib[n]
 
-# Test cases
-print(customFibFib(1, [1, 1, 2], 1000))  # Output: 1
-print(customFibFib(5, [-1, 0, 1], 1000))  # Output: 2
-print(customFibFib(8, [0, 1, 2], 5))  # Output: 'Limit Exceeded'

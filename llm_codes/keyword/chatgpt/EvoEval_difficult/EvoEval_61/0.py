@@ -12,12 +12,3 @@ def correct_bracketing_advanced(brackets: str):
 
     return not stack
 
-# Test cases
-print(correct_bracketing_advanced("("))       # False
-print(correct_bracketing_advanced("()"))      # True
-print(correct_bracketing_advanced("(()())"))  # True
-print(correct_bracketing_advanced(")(()"))    # False
-print(correct_bracketing_advanced("[{()}]"))  # True
-print(correct_bracketing_advanced("[{()"))    # False
-print(correct_bracketing_advanced("{[()]}"))  # True
-print(correct_bracketing_advanced("{[(])}"))  # False
