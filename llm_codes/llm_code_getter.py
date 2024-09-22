@@ -11,6 +11,7 @@ load_dotenv('.env')
 models = {
     'code-millenials': "code-millenials-34b-utk",
     'speechless-codellama': "speechless-codellama-34b-llm-exp",
+    'deepseek-coder': "deepseek-coder",
     'gpt-4': "gpt-4",
     'chatgpt': "gpt-3.5-turbo",
 }
@@ -77,8 +78,12 @@ def huggingface_call(model, sys_prompt, problem_id, user_prompt):
 
 
 def openAI_call(model, sys_prompt, problem_id, user_prompt):
-    openai_key = os.getenv('openAI_api_key')
-    client = OpenAI(api_key = openai_key)
+    if model == 'deepseek-coder':
+        deepseek_key = os.getenv('deepseek_api_key')
+        client = OpenAI(api_key=deepseek_key, base_url='https://api.deepseek.com')
+    else:
+        openai_key = os.getenv('openAI_api_key')
+        client = OpenAI(api_key = openai_key)
 
     response = client.chat.completions.create(
         model=models[model],
@@ -92,8 +97,8 @@ def openAI_call(model, sys_prompt, problem_id, user_prompt):
                 "content": user_prompt
             }
         ],
-        temperature=0,
-        #max_tokens=256,
+        temperature=0.0,
+        stream=False
     )
     
     response = response.choices[0].message.content
@@ -110,7 +115,7 @@ if __name__ == '__main__':
     for problem in data["user_prompt"]:
         user_prompt = data["user_prompt"][problem]
         print("Processing", problem)
-        if ("gpt" in llm) or ("GPT" in llm):
+        if ("gpt" in llm) or ("deep" in llm):
             print("OpenAI call")
             openAI_call(llm, sys_prompt, problem, user_prompt)
         else:

@@ -1,0 +1,35 @@
+To ensure the code is energy efficient, we should aim to minimize unnecessary computations and memory usage. Here's a version of the `weighted_mean_absolute_deviation` function that adheres to these principles:
+
+```python
+from typing import List, Tuple
+
+def weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:
+    """
+    Calculate the Weighted Mean Absolute Deviation around the weighted mean of the dataset.
+    
+    :param numbers: List of tuples where each tuple consists of a data point (x) and its associated weight (w).
+    :return: Weighted Mean Absolute Deviation.
+    """
+    # Check if weights are positive and sum to 1
+    total_weight = sum(weight for _, weight in numbers)
+    if total_weight != 1 or any(weight <= 0 for _, weight in numbers):
+        return "Weights must be positive and sum to 1"
+    
+    # Calculate the weighted mean
+    weighted_mean = sum(x * w for x, w in numbers)
+    
+    # Calculate the Weighted Mean Absolute Deviation
+    wmad = sum(w * abs(x - weighted_mean) for x, w in numbers)
+    
+    return wmad
+
+# Example usage
+print(weighted_mean_absolute_deviation([(1.0, 0.1), (2.0, 0.2), (3.0, 0.3), (4.0, 0.4)]))  # Output: 0.8
+```
+
+### Explanation:
+1. **Weight Check**: The function first checks if the weights are positive and sum to 1. This is done in a single pass through the list, ensuring efficiency.
+2. **Weighted Mean Calculation**: The weighted mean is calculated in a single pass through the list.
+3. **WMAD Calculation**: The Weighted Mean Absolute Deviation (WMAD) is calculated in a single pass through the list.
+
+This approach minimizes the number of passes through the list, reducing both computational and memory overhead.
