@@ -23,4 +23,4 @@ If `s` is `'above'`, the function checks if all numbers in the list `l` are abov
 
 If `s` is neither `'below'` nor `'above'`, the function returns `-1`.
 
-The function uses a for loop to iterate over the list `l` and check if each number is below or above the threshold. If a number violates the condition, the function returns the index of the first violating element. If all numbers are below or above the threshold, the function returns `True`.
+The function uses a for loop to iterate over the list `l` and check if each number is below or above the threshold. If a number violates the condition, the function returns the index of the first element that violates the condition. If all numbers are below or above the threshold, the function returns `True`.
