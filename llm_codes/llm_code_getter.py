@@ -35,7 +35,7 @@ def preprocess_response(llm, response, user_prompt=None):
     return response
 
 
-def write_to_file(llm, experiment, code_id, response, user_prompt=None):
+def write_to_file(experiment, llm, code_id, response, user_prompt=None):
     out_folder = f'./{experiment}/{llm}/EvoEval_difficult/EvoEval_{code_id}'
     if not os.path.isdir(out_folder):
         os.makedirs(out_folder)
@@ -50,9 +50,24 @@ def write_to_file(llm, experiment, code_id, response, user_prompt=None):
     print("Written problem", code_id)
 
 
-def huggingface_call(model, sys_prompt, problem_id, user_prompt):
-    endpoint = get_inference_endpoint(models[model])
-    messages=[
+def prompt_builder(experiment, model, problem_id, prompts_data):
+    user_prompt = prompts_data['user_prompt'][str(problem_id)]
+    system_prompt_data = prompts_data['system_prompt']
+
+    if experiment == 'keyword':
+        sys_prompt = system_prompt_data[experiment]
+    elif experiment == 'guideline':
+        sys_prompt = system_prompt_data[experiment]['base_start']
+        guideline_counter = 1
+        for guideline_category in system_prompt_data[experiment]['problem'][str(problem_id)]:
+            for guideline in system_prompt_data[experiment]['guidelines'][guideline_category]:
+                sys_prompt += str(guideline_counter) + ". " + guideline + "\n\n"
+                guideline_counter += 1
+        sys_prompt += system_prompt_data[experiment]['base_end']
+
+
+    if model in ['gpt-4', 'chatgpt', 'deepseek-coder']:
+        prompt = [
             {
                 "role": "system",
                 "content": sys_prompt
@@ -61,23 +76,32 @@ def huggingface_call(model, sys_prompt, problem_id, user_prompt):
                 "role": "user",
                 "content": user_prompt
             }
-    ]
-    if model == 'code-millenials':
-        messages = hf_prompt_template.format(sys_prompt=sys_prompt, 
-                                             user_prompt=user_prompt)
+        ]
+    elif model == 'code-millenials':
+        prompt = hf_prompt_template.format(sys_prompt=sys_prompt, 
+                                            user_prompt=user_prompt)
     elif model == 'speechless-codellama':
-        messages = hf_prompt_template.format(sys_prompt=sys_prompt, 
-                                             user_prompt='\n'+user_prompt)
+        prompt = hf_prompt_template.format(sys_prompt=sys_prompt, 
+                                            user_prompt='\n'+user_prompt)
+    else:
+        return "Broken"
+
+    print(problem_id, prompt)
+    return prompt
+    
 
 
 
+def huggingface_call(experiment, prompts_data, model, problem_id):
+    endpoint = get_inference_endpoint(models[model])
+    messages = prompt_builder(experiment, model, problem_id, prompts_data)
     response = endpoint.client.text_generation(messages,
                                              max_new_tokens=1200,
                                              temperature=0.01)
-    write_to_file(model, experiment, problem_id, response, user_prompt)
+    write_to_file(experiment, model, problem_id, response, user_prompt)
 
 
-def openAI_call(model, sys_prompt, problem_id, user_prompt):
+def openAI_call(experiment, prompts_data, model, problem_id):
     if model == 'deepseek-coder':
         deepseek_key = os.getenv('deepseek_api_key')
         client = OpenAI(api_key=deepseek_key, base_url='https://api.deepseek.com')
@@ -87,40 +111,29 @@ def openAI_call(model, sys_prompt, problem_id, user_prompt):
 
     response = client.chat.completions.create(
         model=models[model],
-        messages=[
-            {
-                "role": "system",
-                "content": sys_prompt
-            },
-            {
-                "role": "user",
-                "content": user_prompt
-            }
-        ],
+        messages = prompt_builder(experiment, model, problem_id, prompts_data),
         temperature=0.0,
         stream=False
     )
     
     response = response.choices[0].message.content
-    write_to_file(model, experiment, problem_id, response)
+    write_to_file(experiment, model, problem_id, response)
 
 
 if __name__ == '__main__':
     with open('./relevant_name.json', 'r') as file:
-        data = json.load(file)
+        prompts_data = json.load(file)
     experiment = sys.argv[1]
     llm = sys.argv[2]
-    sys_prompt = data["system_prompt"][experiment]
 
-    for problem in data["user_prompt"]:
-        user_prompt = data["user_prompt"][problem]
+    for problem in prompts_data["user_prompt"]:
         print("Processing", problem)
         if ("gpt" in llm) or ("deep" in llm):
             print("OpenAI call")
-            openAI_call(llm, sys_prompt, problem, user_prompt)
+            openAI_call(experiment, prompts_data, llm, problem)
         else:
             print("HuggingFace call")
-            huggingface_call(llm, sys_prompt, problem, user_prompt)
+            huggingface_call(experiment, prompts_data, llm, problem)
 
 
 
