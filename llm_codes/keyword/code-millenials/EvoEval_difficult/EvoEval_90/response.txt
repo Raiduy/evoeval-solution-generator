@@ -28,4 +28,4 @@ This function works by keeping track of the smallest and second smallest numbers
 
 If the list contains less than two elements, the function will return (None, None) as there are not enough elements to determine the 2nd smallest and 2nd largest numbers.
 
-If the list contains duplicate elements, the function will consider the first encountered duplicate as the 2nd smallest or largest number. For example, in the list [1, 1], 1 is both the smallest and the largest number, so the function will return (None, None) as there are not enough distinct numbers to determine the 2nd smallest and 2nd largest numbers.
+If the list contains duplicate elements, the function will consider the first encountered duplicate as the 2nd smallest or largest number. For example, in the list [1, 1], 1 is both the smallest and the largest number, and there is no 2nd smallest or largest number, so the function will return (None, None).
