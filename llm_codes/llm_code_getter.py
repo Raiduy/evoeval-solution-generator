@@ -32,6 +32,7 @@ def preprocess_response(llm, response, user_prompt=None):
             response = user_prompt + '\n' + response.split('if __name__')[0]
         elif llm == 'speechless-codellama':
             response = user_prompt + '\n' + response
+    print("\nResponse is\n", response)
     return response
 
 
@@ -86,7 +87,7 @@ def prompt_builder(experiment, model, problem_id, prompts_data):
     else:
         return "Broken"
 
-    print(problem_id, prompt)
+    print("\nPrompt is\n", prompt)
     return prompt
     
 
@@ -124,11 +125,22 @@ def openAI_call(experiment, prompts_data, model, problem_id):
 if __name__ == '__main__':
     with open('./relevant_name.json', 'r') as file:
         prompts_data = json.load(file)
+
     experiment = sys.argv[1]
     llm = sys.argv[2]
 
-    for problem in prompts_data["user_prompt"]:
-        print("Processing", problem)
+    problems = prompts_data["user_prompt"]
+
+    if len(sys.argv) > 3:
+        problems = []
+        problems_string = sys.argv[3]
+        if ',' in problems_string:
+            problems.extend(problems_string.split(','))
+        else:
+            problems.append(problems_string)
+
+    for problem in problems:
+        print("Processing problem", problem, "through", llm)
         if ("gpt" in llm) or ("deep" in llm):
             print("OpenAI call")
             openAI_call(experiment, prompts_data, llm, problem)
