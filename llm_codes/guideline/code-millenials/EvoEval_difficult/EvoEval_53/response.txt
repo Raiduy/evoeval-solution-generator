@@ -1,0 +1,15 @@
+ Here is the Python code that follows the above guidelines:
+
+```python
+def add_elements(list1: list, list2: list, index: int):
+    try:
+        result = list1[index] + list2[index]
+        return result, False
+    except IndexError:
+        return None, True
+```
+
+This code follows the guidelines by:
+
+1. Using a variable (`result`) to store the addition operation.
+2. Handling the exception and returning a tuple with a boolean indicating whether an exception occurred.

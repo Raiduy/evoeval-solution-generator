@@ -1,0 +1,44 @@
+```python
+def advancedDigitSum(s, t):
+    """
+    Calculate the sum of ASCII codes for uppercase characters in 's' and lowercase characters in 't'.
+    
+    Parameters:
+    s (str): The first input string.
+    t (str): The second input string.
+    
+    Returns:
+    tuple: A tuple containing the sum of ASCII codes for uppercase characters in 's' and lowercase characters in 't'.
+    """
+    # Initialize sums
+    sum_s = 0
+    sum_t = 0
+    
+    # Loop through each character in 's'
+    for char in s:
+        if 'A' <= char <= 'Z':  # Check if the character is uppercase
+            sum_s += ord(char)  # Add ASCII value to sum_s
+    
+    # Loop through each character in 't'
+    for char in t:
+        if 'a' <= char <= 'z':  # Check if the character is lowercase
+            sum_t += ord(char)  # Add ASCII value to sum_t
+    
+    return (sum_s, sum_t)
+
+# Example usage:
+print(advancedDigitSum("", "abc"))  # Output: (0, 294)
+print(advancedDigitSum("abAB", "abc"))  # Output: (131, 294)
+print(advancedDigitSum("abcCd", ""))  # Output: (67, 0)
+print(advancedDigitSum("helloE", "abc"))  # Output: (69, 294)
+print(advancedDigitSum("woArBld", "xyz"))  # Output: (131, 363)
+print(advancedDigitSum("aAaaaXa", ",.!"))  # Output: (153, 0)
+```
+
+### Explanation:
+1. **Initialization**: We initialize `sum_s` and `sum_t` to 0. These will store the sums of ASCII values for uppercase characters in `s` and lowercase characters in `t`, respectively.
+2. **Loop through `s`**: We iterate through each character in `s`. If the character is uppercase (`'A' <= char <= 'Z'`), we add its ASCII value to `sum_s`.
+3. **Loop through `t`**: Similarly, we iterate through each character in `t`. If the character is lowercase (`'a' <= char <= 'z'`), we add its ASCII value to `sum_t`.
+4. **Return Result**: Finally, we return a tuple `(sum_s, sum_t)` containing the sums for `s` and `t`.
+
+This implementation efficiently handles the task by iterating through each string only once and performing minimal operations within the loops.

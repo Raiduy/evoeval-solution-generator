@@ -1,0 +1,26 @@
+Here's the optimized code for the decimal_to_binary function:
+
+```python
+def decimal_to_binary(decimal, padding_length):
+    if not isinstance(decimal, int) or not isinstance(padding_length, int) or decimal < 0 or padding_length < 0:
+        return "Invalid Input"
+    binary = bin(decimal)[2:]
+    if len(binary) > padding_length:
+        return "Padding length is too small"
+    binary = binary.zfill(padding_length)
+    return f"db{binary}db"
+```
+
+Explanation:
+
+1. We first check if the input parameters are valid integers and if they are positive. If not, we return an error message.
+
+2. We convert the decimal number to binary using the built-in `bin()` function and remove the '0b' prefix using slicing `[2:]`.
+
+3. We check if the length of the binary string is greater than the padding length. If so, we return an error message.
+
+4. We pad the binary string with zeros using the `zfill()` method to reach the required padding length.
+
+5. We concatenate the 'db' characters at the beginning and end of the binary string using f-strings.
+
+6. We return the final binary string.

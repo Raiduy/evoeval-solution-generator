@@ -1,0 +1,25 @@
+Here is an energy-efficient version of the code that checks for correct bracketing. This code uses a stack to keep track of the opening brackets and checks if the closing bracket matches the last opening bracket. This approach minimizes memory accesses and reduces the number of created objects.
+
+```python
+def correct_bracketing_advanced(brackets: str) -> bool:
+    stack = []
+    bracket_map = {")": "(", "}": "{", "]": "["}
+
+    for bracket in brackets:
+        if bracket in bracket_map.values():  # opening brackets
+            stack.append(bracket)
+        elif bracket in bracket_map.keys():  # closing brackets
+            if stack == [] or bracket_map[bracket] != stack.pop():
+                return False
+    return stack == []
+```
+
+This code follows the guidelines by:
+
+1. Using a single data structure (stack) to keep track of the opening brackets, which minimizes memory accesses and reduces the number of created objects.
+
+2. Using a dictionary to map closing brackets to their corresponding opening brackets, which avoids redundant operations.
+
+3. Using short-circuit versions of logical operators in the if condition, where the second argument is evaluated only if the first argument is insufficient to determine the value of the expression.
+
+4. Using a loop to iterate over the brackets string, but the loop ends early if a closing bracket does not match the last opening bracket, which is an example of loop optimization.

@@ -1,0 +1,25 @@
+Here is the energy-efficient code for your task:
+
+```python
+def decimal_to_binary(decimal, padding_length):
+    # Check if inputs are valid
+    if not isinstance(decimal, int) or not isinstance(padding_length, int) or decimal < 0 or padding_length < 0:
+        return "Invalid Input"
+
+    # Convert decimal to binary
+    binary = bin(decimal)[2:]
+
+    # Check if padding length is sufficient
+    if len(binary) > padding_length:
+        return "Padding length is too small"
+
+    # Pad binary with '0's at the beginning
+    binary = binary.zfill(padding_length)
+
+    # Add extra characters at the beginning and end
+    binary = "db" + binary + "db"
+
+    return binary
+```
+
+This code follows the guidelines by minimizing memory accesses and reducing the number of created objects. It checks the validity of the inputs at the beginning to avoid unnecessary computations. It also uses the built-in `bin` function to convert the decimal to binary, which is more efficient than manually performing the conversion. The `zfill` function is used to pad the binary number with '0's at the beginning, which is more efficient than using a loop to add the '0's. Finally, the extra characters are added at the beginning and end of the binary number in a single operation to reduce the number of string concatenations.

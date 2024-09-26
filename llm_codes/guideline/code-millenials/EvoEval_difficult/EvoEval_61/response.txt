@@ -1,0 +1,29 @@
+ Here is a Python solution that follows the guidelines you provided:
+
+```python
+def correct_bracketing_advanced(brackets: str) -> bool:
+    # Assigning to a variable
+    opening_brackets = "({["
+    closing_brackets = ")}]"
+    stack = []
+    
+    for bracket in brackets:
+        # Check if it is an opening bracket
+        if bracket in opening_brackets:
+            stack.append(bracket)
+        else:
+            # Check if it is a closing bracket
+            if not stack:
+                return False
+            else:
+                # Check if brackets are correctly nested
+                if opening_brackets.index(stack.pop()) != closing_brackets.index(bracket):
+                    return False
+    
+    # Check if all brackets are closed
+    return not stack
+```
+
+This solution uses a stack to keep track of the opening brackets. When a closing bracket is encountered, it checks if the last opening bracket corresponds to the current closing bracket. If not, it returns False. At the end, if there are still unclosed brackets in the stack, it returns False. Otherwise, it returns True.
+
+This solution is energy efficient because it only iterates over the string once and uses a constant amount of memory to store the stack. It also avoids redundant operations by not checking the brackets that are already checked. It minimizes memory accesses by only accessing the brackets one by one and it reduces the number of created objects by not creating unnecessary variables.
