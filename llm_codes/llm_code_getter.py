@@ -98,6 +98,7 @@ def huggingface_call(experiment, prompts_data, model, problem_id):
     response = endpoint.client.text_generation(messages,
                                              max_new_tokens=1200,
                                              temperature=0.01)
+    user_prompt = prompts_data['user_prompt'][str(problem_id)]
     write_to_file(experiment, model, problem_id, response, user_prompt)
 
 
