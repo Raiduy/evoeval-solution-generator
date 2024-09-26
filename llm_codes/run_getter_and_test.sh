@@ -13,6 +13,7 @@ else
     python3 llm_code_getter.py $1 $2 $3 >> ./$1/$2/retries/$3.log
     rm -f ./$1/$2/EvoEval_difficult/eval_results.json
     python3 ../../evoeval/evoeval/evaluate.py --dataset EvoEval_difficult --samples ./$1/$2/EvoEval_difficult/ | grep 'pass' >> ./$1/$2/retries/$3.log
+    echo $( tail -n 1 ./$1/$2/retries/$3.log )
     python3 -m json.tool ./$1/$2/EvoEval_difficult/eval_results.json &>> ./$1/$2/retries/$3.json
     echo "" >> ./$1/$2/retries/$3.log
     echo "---------------------------------------------------" >> ./$1/$2/retries/$3.log
