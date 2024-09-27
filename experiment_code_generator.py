@@ -11,8 +11,6 @@ SOLUTIONS_FOLDER = './solutions/'
 OUTPUT_FOLDER = './code/'
 EVOEVAL_DIFFICULT_IDS = ['4', '61', '79', '63', '90', '53', '66', '52', '16']
 
-MAX_RUNTIME_S = 180
-
 CODE_TEMPLATE = """
 {target_code}
 
@@ -33,8 +31,6 @@ if __name__ == '__main__':
             execution_counter += 1
 
 """
-
-
 
 
 def get_dataset():
@@ -86,61 +82,32 @@ def export_python_file(output_folder, llm, id, contents):
     return path
 
 
-def get_num_exec(path, llm, problem):
-    with open(f'{path}/times.csv') as f:
-        lines = f.readlines()
-
-    runtimes = []
-    for line in lines:
-        tmp = []
-        if f'{problem}.py' in line:
-            fields = line.split(', ')
-            for i in range(1, 31):
-                field = fields[i].split('m')
-                minutes = 60 * int(field[0])
-                seconds = float(field[1].split('s')[0])
-                tmp.append(minutes + seconds)
-        runtimes.extend(tmp)
-    
-    execs = 10_000
-    if problem in ['16', '66']:
-        execs = 10
-        print(problem, 'hit')
-    per_run = statistics.mean(runtimes) / execs
-    repetitions = int(MAX_RUNTIME_S / per_run)
-    print(f'{llm}/{problem}  {repetitions}')
-    return repetitions
+def get_num_exec(device, problem):
+    num_exec_df = pd.read_csv(f'./{device}/num_exec.csv')
+    num_exec = num_exec_df[num_exec_df['id'] == int(problem)]['num_of_executions'].values[0]
+    return num_exec
 
 
-def process_llms(solutions_folder, all_llms, timings_folder, output_folder):
+def process_llms(solutions_folder, all_llms, device, experiment):
     df = get_dataset()
-    num_exec_df = pd.DataFrame()
     for id in EVOEVAL_DIFFICULT_IDS:
         function, inputs = get_code_inputs(df, id)
         
         for llm in all_llms:
-            code_path = f"{solutions_folder}{llm}/{llm}/EvoEval_difficult/EvoEval_{id}/0.py"
+            code_path = f"./llm_codes/{experiment}/{llm}/EvoEval_difficult/EvoEval_{id}/0.py"
             with open(code_path) as reader:
                 code = reader.read()
-                #code = code.split(':\n')[0] + ':\n\tpass'
-                #print(code)
-            num_of_executions = get_num_exec(timings_folder, llm, id)
-            tmp = pd.DataFrame({'id': id, 'num_of_executions': num_of_executions}, index=[0])
-            num_exec_df = pd.concat([num_exec_df, tmp])
-
+            num_of_executions = get_num_exec(device, id)
             final_code = generate_code(function, code, inputs, num_of_executions)
-            export_python_file(output_folder, llm, id, final_code)
-            #break
-        #break
-    num_exec_df = num_exec_df.drop_duplicates()
-    num_exec_df.to_csv('./server/num_exec.csv', index=False)
+            export_python_file(f'./{device}/{experiment}/', llm, id, final_code)
+
 
 if __name__ == '__main__':
     solutions_folder = sys.argv[1] # SOLUTIONS_FOLDER
-    timings_folder = sys.argv[2] # TIMINGS_FOLDER
-    output_folder = sys.argv[3] # OUTPUT_FOLDER
+    device = sys.argv[2]
+    experiment = sys.argv[3]
 
-    all_llms = os.listdir(solutions_folder)
+    all_llms = ['gpt-4', 'code-millenials', 'speechless-codellama', 'chatgpt', 'deepseek-coder']
 
-    process_llms(solutions_folder, all_llms, timings_folder, output_folder)
+    process_llms(solutions_folder, all_llms, device, experiment)
  

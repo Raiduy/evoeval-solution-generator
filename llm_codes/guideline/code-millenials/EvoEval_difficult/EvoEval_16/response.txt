@@ -1,0 +1,16 @@
+ Here is the Python code that solves the problem:
+
+```python
+def count_distinct_characters_substrings(string: str, length: int) -> dict:
+    if length > len(string):
+        return {}
+    else:
+        result = {}
+        for i in range(len(string) - length + 1):
+            substring = string[i:i+length]
+            distinct_chars = len(set(substring))
+            result[substring] = distinct_chars
+        return result
+```
+
+This code first checks if the length is greater than the string length. If it is, it returns an empty dictionary. Otherwise, it initializes an empty dictionary to store the results. It then iterates over the string with a sliding window of size 'length'. For each window, it computes the set of distinct characters, which automatically removes duplicate characters, and then gets its length. This gives the number of distinct characters in the current window. The window itself is used as the key, and the count of distinct characters is used as the value. Finally, it returns the dictionary.

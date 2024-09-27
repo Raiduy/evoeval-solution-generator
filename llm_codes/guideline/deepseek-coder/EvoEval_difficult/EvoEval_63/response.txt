@@ -1,0 +1,53 @@
+To implement the `customFibFib` function efficiently, we can use an iterative approach to avoid the exponential time complexity of a recursive solution. We'll also use a loop to compute the sequence values up to the n-th element, checking the limit condition at each step.
+
+Here's the optimized implementation:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    # Ensure the startSequence has exactly 3 elements
+    if len(startSequence) != 3:
+        raise ValueError("startSequence must contain exactly 3 elements")
+    
+    # Unpack the start sequence
+    a, b, c = startSequence
+    
+    # Handle the base cases directly
+    if n == 0:
+        return a
+    elif n == 1:
+        return b
+    elif n == 2:
+        return c
+    
+    # Initialize the first three values
+    prev3, prev2, prev1 = a, b, c
+    
+    # Loop to compute the sequence up to the n-th element
+    for i in range(3, n + 1):
+        # Compute the next value in the sequence
+        next_val = prev1 + prev2 + prev3
+        
+        # Check if the limit is exceeded
+        if next_val > p:
+            return 'Limit Exceeded'
+        
+        # Update the previous values for the next iteration
+        prev3, prev2, prev1 = prev2, prev1, next_val
+    
+    # Return the n-th element
+    return prev1
+
+# Test cases
+print(customFibFib(1, [1, 1, 2], 1000))  # Output: 1
+print(customFibFib(5, [-1, 0, 1], 1000))  # Output: 2
+print(customFibFib(8, [0, 1, 2], 5))      # Output: 'Limit Exceeded'
+```
+
+### Explanation:
+1. **Base Cases Handling**: We handle the base cases directly for `n = 0`, `n = 1`, and `n = 2`.
+2. **Loop Initialization**: We initialize the first three values from the `startSequence`.
+3. **Iterative Computation**: We use a loop to compute the sequence values up to the n-th element. At each step, we compute the next value by summing the previous three values.
+4. **Limit Check**: We check if the computed value exceeds the limit `p`. If it does, we return `'Limit Exceeded'` immediately.
+5. **Update Previous Values**: We update the previous values for the next iteration efficiently.
+
+This approach ensures that we only compute the necessary values and avoid redundant computations, making the function both time and space efficient.

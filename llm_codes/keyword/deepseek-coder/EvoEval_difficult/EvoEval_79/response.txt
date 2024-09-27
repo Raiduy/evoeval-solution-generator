@@ -1,0 +1,37 @@
+To create an energy-efficient version of the `decimal_to_binary` function, we should focus on minimizing the number of operations and ensuring that the function runs efficiently. Here's a version of the function that adheres to these principles:
+
+```python
+def decimal_to_binary(decimal, padding_length):
+    # Validate inputs
+    if not isinstance(decimal, int) or not isinstance(padding_length, int) or decimal < 0 or padding_length <= 0:
+        return "Invalid Input"
+    
+    # Convert decimal to binary
+    binary_str = bin(decimal)[2:]  # bin() returns a string prefixed with '0b', so we slice it off
+    
+    # Check if padding length is sufficient
+    if len(binary_str) > padding_length:
+        return "Padding length is too small"
+    
+    # Pad the binary string with leading zeros
+    padded_binary_str = binary_str.zfill(padding_length)
+    
+    # Add the 'db' prefix and suffix
+    result = f"db{padded_binary_str}db"
+    
+    return result
+
+# Example usage:
+print(decimal_to_binary(15, 5))   # Output: "db01111db"
+print(decimal_to_binary(32, 5))   # Output: "Padding length is too small"
+print(decimal_to_binary(32, 10))  # Output: "db0000100000db"
+```
+
+### Explanation:
+1. **Input Validation**: The function first checks if the inputs are valid. It ensures that `decimal` is a non-negative integer and `padding_length` is a positive integer. If not, it returns "Invalid Input".
+2. **Binary Conversion**: The `bin()` function is used to convert the decimal number to a binary string. The `[2:]` slice removes the '0b' prefix that `bin()` adds.
+3. **Padding Check**: The function checks if the length of the binary string exceeds the `padding_length`. If it does, it returns "Padding length is too small".
+4. **Padding**: The `zfill()` method is used to pad the binary string with leading zeros to meet the required `padding_length`.
+5. **Formatting**: The formatted string is constructed by adding the 'db' prefix and suffix.
+
+This approach ensures that the function is both efficient and easy to understand, making it suitable for energy-efficient execution.

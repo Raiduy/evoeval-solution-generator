@@ -1,0 +1,23 @@
+ Here is an optimized version of your code:
+
+```python
+def below_above_threshold(l: list, t1: int, t2: int, s: str):
+    if s == 'below':
+        for i, num in enumerate(l):
+            if num >= t1:
+                return i
+        return True
+    elif s == 'above':
+        for i, num in enumerate(l):
+            if num <= t2:
+                return i
+        return True
+    else:
+        return -1
+```
+
+This code iterates through the list only once, checking each element against the condition, and immediately returning the index of the first element that violates the condition. If no such element is found, it returns True. This approach saves time compared to a naive implementation that checks each condition separately.
+
+The code also uses the built-in `enumerate` function to iterate over the list, which is slightly more efficient than using a range and indexing the list.
+
+Finally, it handles the case where `s` is neither `'below'` nor `'above'` by immediately returning `-1`, avoiding unnecessary computation.

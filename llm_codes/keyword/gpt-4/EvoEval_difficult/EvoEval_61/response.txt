@@ -1,0 +1,17 @@
+Here is the Python code that fulfills your request:
+
+```python
+def correct_bracketing_advanced(brackets: str) -> bool:
+    stack = []
+    bracket_map = {"(": ")", "[": "]", "{": "}"}
+
+    for bracket in brackets:
+        if bracket in bracket_map:
+            stack.append(bracket)
+        elif len(stack) == 0 or bracket != bracket_map[stack.pop()]:
+            return False
+
+    return len(stack) == 0
+```
+
+This function uses a stack to keep track of the opening brackets. When it encounters a closing bracket, it checks if the top of the stack is the corresponding opening bracket. If it is, it pops the opening bracket from the stack. If it isn't, or if the stack is empty, it returns False. If it has processed all brackets and the stack is empty, it returns True. This approach ensures that the brackets are correctly nested and that each opening bracket has a corresponding closing bracket of the same type.

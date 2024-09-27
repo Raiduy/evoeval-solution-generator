@@ -1,0 +1,21 @@
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    if n == 0:
+        return startSequence[0]
+    elif n == 1:
+        return startSequence[1]
+    elif n == 2:
+        return startSequence[2]
+    else:
+        a, b, c = startSequence
+        for i in range(3, n+1):
+            a, b, c = b, c, a+b+c
+            if c > p:
+                return 'Limit Exceeded'
+        return c
+```
+
+Explanation:
+
+The function first checks if `n` is 0, 1, or 2, and returns the corresponding value from `startSequence`. If `n` is greater than 2, it initializes `a`, `b`, and `c` to the first three values in `startSequence`. Then, it enters a loop that starts at 3 and goes up to `n`. In each iteration of the loop, it updates `a`, `b`, and `c` to the next three values in the sequence. If `c` exceeds `p`, it immediately returns 'Limit Exceeded'. Finally, it returns `c` as the n-th element of the sequence.

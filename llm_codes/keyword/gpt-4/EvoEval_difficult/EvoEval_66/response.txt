@@ -1,0 +1,10 @@
+Here is the Python code that fulfills your requirements:
+
+```python
+def advancedDigitSum(s, t):
+    s_sum = sum(ord(c) for c in s if c.isupper())
+    t_sum = sum(ord(c) for c in t if c.islower())
+    return s_sum, t_sum
+```
+
+This function uses Python's built-in `ord` function to get the ASCII value of a character, and `isupper` and `islower` methods to check if a character is uppercase or lowercase respectively. It uses a generator expression within the `sum` function to efficiently iterate over the characters in the strings. If a string is empty or does not contain any character of the required case, the `sum` function returns 0.

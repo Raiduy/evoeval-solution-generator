@@ -1,0 +1,31 @@
+ Here is a Python solution for the problem:
+
+```python
+def next_smallest_and_largest(lst):
+    if len(lst) < 2:
+        return None, None
+
+    smallest = float('inf')
+    second_smallest = float('inf')
+    largest = float('-inf')
+    second_largest = float('-inf')
+
+    for num in lst:
+        if num < smallest:
+            second_smallest, smallest = smallest, num
+        elif smallest < num < second_smallest:
+            second_smallest = num
+
+        if num > largest:
+            second_largest, largest = largest, num
+        elif largest > num > second_largest:
+            second_largest = num
+
+    return second_smallest if second_smallest != float('inf') else None, second_largest if second_largest != float('-inf') else None
+```
+
+This function works by keeping track of the smallest and second smallest numbers as well as the largest and second largest numbers seen so far while iterating over the list. This approach ensures that the function will only iterate over the list once, making it an O(n) time complexity solution.
+
+If the list contains less than two elements, the function will return (None, None) as there are not enough elements to determine the 2nd smallest and 2nd largest numbers.
+
+If the list contains duplicate elements, the function will consider the first encountered duplicate as the 2nd smallest or largest number. For example, in the list [1, 1], 1 is both the smallest and the largest number, and there is no 2nd smallest or largest number, so the function will return (None, None).

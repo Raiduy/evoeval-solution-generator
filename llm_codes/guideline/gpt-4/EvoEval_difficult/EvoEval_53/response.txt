@@ -1,0 +1,14 @@
+Here is the energy-efficient code for your function:
+
+```python
+def add_elements(list1: list, list2: list, index: int):
+    try:
+        result = list1[index] + list2[index]
+        return (result, False)
+    except IndexError:
+        return (None, True)
+```
+
+This function tries to add the elements at the given index from both lists. If an `IndexError` occurs (which means the index is out of range for one or both of the lists), it catches the exception and returns `None` for the result and `True` for the exception occurred. If no exception occurs, it returns the result of the addition and `False` for the exception occurred.
+
+This code is energy efficient because it avoids unnecessary operations. It directly tries to perform the required operation and handles any exceptions that may occur, instead of checking the lengths of the lists first. This reduces the number of operations and thus the energy consumption.

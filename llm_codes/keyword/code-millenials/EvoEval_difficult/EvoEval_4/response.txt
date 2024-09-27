@@ -1,0 +1,19 @@
+ Here is a Python solution using a generator expression to calculate the weighted mean and a list comprehension to calculate the weighted mean absolute deviation:
+
+```python
+from typing import List, Tuple
+
+def weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:
+    weights = [x[1] for x in numbers]
+    if any(w <= 0 for w in weights) or sum(weights) != 1:
+        return 'Weights must be positive and sum to 1'
+    
+    weighted_mean = sum(x[0] * x[1] for x in numbers)
+    weighted_mad = sum(x[1] * abs(x[0] - weighted_mean) for x in numbers) / sum(weights)
+    
+    return weighted_mad
+```
+
+This function first checks if all weights are positive and if they sum to 1. If not, it returns an error message. Then it calculates the weighted mean and the weighted mean absolute deviation.
+
+The weighted mean is calculated by multiplying each data point by its weight and summing the results. The weighted mean absolute deviation is calculated by multiplying each difference between a data point and the weighted mean by its weight and summing the results. This sum is then divided by the total weight to get the final weighted mean absolute deviation.

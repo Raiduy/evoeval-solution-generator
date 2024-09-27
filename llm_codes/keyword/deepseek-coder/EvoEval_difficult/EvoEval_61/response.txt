@@ -1,0 +1,52 @@
+To create an energy-efficient function that checks if the brackets are correctly nested and matched, we can use a stack data structure. This approach ensures that we only traverse the string once, making it both time and space efficient.
+
+Here's the implementation:
+
+```python
+def correct_bracketing_advanced(brackets: str) -> bool:
+    """
+    brackets is a string comprising "(", ")", "{", "}", "[", "]".
+    return True if every opening bracket has a corresponding closing bracket of the same type and is correctly nested. 
+    The bracket types must not intersect with one another.
+    """
+    # Dictionary to hold the matching pairs of brackets
+    matching_bracket = {')': '(', '}': '{', ']': '['}
+    
+    # Stack to keep track of opening brackets
+    stack = []
+    
+    for bracket in brackets:
+        if bracket in matching_bracket.values():
+            # If it's an opening bracket, push it onto the stack
+            stack.append(bracket)
+        elif bracket in matching_bracket:
+            # If it's a closing bracket, check if it matches the top of the stack
+            if stack == [] or matching_bracket[bracket] != stack.pop():
+                return False
+        else:
+            # If the character is not a bracket, return False
+            return False
+    
+    # If the stack is empty, all brackets were matched correctly
+    return stack == []
+
+# Test cases
+print(correct_bracketing_advanced("("))        # False
+print(correct_bracketing_advanced("()"))       # True
+print(correct_bracketing_advanced("(()())"))   # True
+print(correct_bracketing_advanced(")(()"))     # False
+print(correct_bracketing_advanced("[{()}]"))   # True
+print(correct_bracketing_advanced("[{()}"))    # False
+print(correct_bracketing_advanced("{[()]}"))   # True
+print(correct_bracketing_advanced("{[(])}"))   # False
+```
+
+### Explanation:
+1. **Matching Brackets Dictionary**: We use a dictionary to map each closing bracket to its corresponding opening bracket.
+2. **Stack**: We use a list as a stack to keep track of the opening brackets.
+3. **Iteration**: We iterate through each character in the input string:
+   - If the character is an opening bracket, we push it onto the stack.
+   - If the character is a closing bracket, we check if it matches the top of the stack. If it doesn't match or the stack is empty, we return `False`.
+4. **Final Check**: After the loop, if the stack is empty, it means all brackets were matched correctly, so we return `True`. Otherwise, we return `False`.
+
+This approach ensures that the function runs in O(n) time complexity, where n is the length of the input string, and uses O(n) space complexity in the worst case (when all characters are opening brackets).
