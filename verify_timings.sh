@@ -1,8 +1,8 @@
 #!/bin/bash
 
-llms=(`ls ./code/`)
-touch ./code/times.csv
-echo code, run > ./code/times.csv
+llms=(`ls ./server/code/`)
+touch ./server/code/times.csv
+echo code, run > ./server/code/times.csv
 
 for llm in ${llms[*]}
 do
@@ -12,12 +12,13 @@ do
         continue 1
 
     fi
-    problems=(`ls ./code/${llm}`)
+    problems=(`ls ./server/code/${llm}`)
     for problem in ${problems[*]}
     do
-        echo "Processing ${llm}/${problem}"
-        time_output=(`{ time python3 ./code/${llm}/${problem}; } |& grep real`)
-        echo ${llm}/${problem}, ${time_output[1]} >> ./code/times.csv
+        echo -n "Processing ${llm}/${problem}"
+        time_output=(`{ time python3 ./server/code/${llm}/${problem}; } |& grep real`)
+        echo ${llm}/${problem}, ${time_output[1]} >> ./server/code/times.csv
+        echo " - ${time_output[1]}"
     done
     git add . && git commit -m "${llm} 1000 runs done" && git push
 done
