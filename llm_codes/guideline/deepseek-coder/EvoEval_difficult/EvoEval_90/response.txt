@@ -1,0 +1,56 @@
+To achieve the desired functionality with a time complexity of O(n), we can iterate through the list once to find the 2nd smallest and 2nd largest elements. Here's how you can implement this:
+
+```python
+def next_smallest_and_largest(lst):
+    """
+    Returns a tuple of the 2nd smallest and the 2nd largest elements of the list.
+    Returns None if there is no such element.
+    """
+    if len(lst) < 2:
+        return (None, None)
+    
+    # Initialize variables to track the smallest and largest elements
+    smallest = second_smallest = float('inf')
+    largest = second_largest = float('-inf')
+    
+    for num in lst:
+        if num < smallest:
+            second_smallest = smallest
+            smallest = num
+        elif num < second_smallest and num != smallest:
+            second_smallest = num
+        
+        if num > largest:
+            second_largest = largest
+            largest = num
+        elif num > second_largest and num != largest:
+            second_largest = num
+    
+    # Check if we found valid second smallest and second largest
+    if second_smallest == float('inf'):
+        second_smallest = None
+    if second_largest == float('-inf'):
+        second_largest = None
+    
+    return (second_smallest, second_largest)
+
+# Test cases
+print(next_smallest_and_largest([1, 2, 3, 4, 5]))  # (2, 4)
+print(next_smallest_and_largest([5, 1, 4, 3, 2]))  # (2, 4)
+print(next_smallest_and_largest([]))               # (None, None)
+print(next_smallest_and_largest([1, 1]))           # (None, None)
+print(next_smallest_and_largest([-1, -2, -3, -4, -5]))  # (-4, -2)
+```
+
+### Explanation:
+1. **Initialization**: We initialize `smallest` and `second_smallest` to positive infinity and `largest` and `second_largest` to negative infinity. This ensures that any number in the list will be smaller than `smallest` and larger than `largest` initially.
+
+2. **Iteration**: We iterate through the list once. For each number:
+   - If the number is smaller than `smallest`, we update `second_smallest` to `smallest` and then `smallest` to the current number.
+   - If the number is smaller than `second_smallest` but not equal to `smallest`, we update `second_smallest`.
+   - Similarly, if the number is larger than `largest`, we update `second_largest` to `largest` and then `largest` to the current number.
+   - If the number is larger than `second_largest` but not equal to `largest`, we update `second_largest`.
+
+3. **Final Check**: After the loop, we check if `second_smallest` and `second_largest` are still set to their initial values. If they are, it means there were not enough distinct elements to determine the 2nd smallest or 2nd largest, so we set them to `None`.
+
+This approach ensures that we only iterate through the list once, achieving the desired O(n) time complexity.

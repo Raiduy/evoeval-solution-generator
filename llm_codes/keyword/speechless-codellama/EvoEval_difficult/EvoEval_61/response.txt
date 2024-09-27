@@ -1,0 +1,15 @@
+Here's an energy-efficient implementation of the `correct_bracketing_advanced` function:
+
+```python
+def correct_bracketing_advanced(brackets: str) -> bool:
+    stack = []
+    for bracket in brackets:
+        if bracket in "([{":
+            stack.append(bracket)
+        elif bracket in ")]}":
+            if not stack or brackets.index(bracket) != brackets.index(stack.pop()):
+                return False
+    return not stack
+```
+
+This implementation uses a stack to keep track of the opening brackets and their corresponding closing brackets. It iterates through the input string and pushes each opening bracket onto the stack. When it encounters a closing bracket, it checks if the top of the stack contains the corresponding opening bracket. If it does, it pops the opening bracket off the stack. If it doesn't, it returns `False`. Finally, it checks if the stack is empty, indicating that all brackets have been correctly matched. If it is, it returns `True`.

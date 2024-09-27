@@ -1,0 +1,19 @@
+Here is an efficient Python function that uses dynamic programming to solve the problem. It stores the computed values in a list to avoid redundant computations:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    if n < 3:
+        return startSequence[n]
+
+    fib_sequence = startSequence[:]
+
+    for i in range(3, n + 1):
+        next_value = fib_sequence[i - 1] + fib_sequence[i - 2] + fib_sequence[i - 3]
+        if next_value > p:
+            return 'Limit Exceeded'
+        fib_sequence.append(next_value)
+
+    return fib_sequence[n]
+```
+
+This function first checks if `n` is less than 3. If it is, it returns the corresponding value from the start sequence. Then it creates a copy of the start sequence and iterates from 3 to `n`. For each iteration, it calculates the next value in the sequence as the sum of the last three values. If this value exceeds `p`, it immediately returns 'Limit Exceeded'. Otherwise, it appends the value to the sequence. Finally, it returns the `n`-th value in the sequence.

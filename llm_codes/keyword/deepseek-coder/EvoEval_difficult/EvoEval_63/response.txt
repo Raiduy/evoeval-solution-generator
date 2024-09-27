@@ -1,0 +1,43 @@
+To create an energy-efficient version of the `customFibFib` function, we can use an iterative approach instead of a recursive one. This avoids the overhead of multiple function calls and stack frames, which can be particularly beneficial for large values of `n`. Additionally, we'll check the sum against the limit `p` at each step to ensure we stop computation as soon as the limit is exceeded.
+
+Here's the implementation:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    """
+    Compute the n-th element of the CustomFibFib sequence with a given starting sequence and a limit p.
+
+    :param n: The position in the sequence to compute.
+    :param startSequence: A list of three integers [a, b, c] representing the starting values.
+    :param p: The limit for the sum of the sequence elements.
+    :return: The n-th element of the sequence or 'Limit Exceeded' if the sum exceeds p.
+    """
+    if n < 0:
+        raise ValueError("n must be a non-negative integer")
+    
+    if n < 3:
+        return startSequence[n]
+    
+    a, b, c = startSequence
+    
+    for i in range(3, n + 1):
+        next_value = a + b + c
+        if next_value > p:
+            return 'Limit Exceeded'
+        a, b, c = b, c, next_value
+    
+    return c
+
+# Test cases
+print(customFibFib(1, [1, 1, 2], 1000))  # Output: 1
+print(customFibFib(5, [-1, 0, 1], 1000))  # Output: 2
+print(customFibFib(8, [0, 1, 2], 5))      # Output: 'Limit Exceeded'
+```
+
+### Explanation:
+1. **Initial Checks**: The function first checks if `n` is less than 0, raising a `ValueError` if true. If `n` is less than 3, it directly returns the corresponding element from the `startSequence`.
+2. **Iterative Calculation**: For `n >= 3`, the function iteratively calculates the next value in the sequence by summing the last three values (`a`, `b`, and `c`). If the sum exceeds `p`, it returns `'Limit Exceeded'`.
+3. **Updating Values**: After calculating the next value, the function updates `a`, `b`, and `c` to the next set of values in the sequence.
+4. **Return Result**: Finally, it returns the last computed value `c`.
+
+This approach ensures that the function runs in linear time relative to `n`, making it efficient and suitable for large values of `n`.

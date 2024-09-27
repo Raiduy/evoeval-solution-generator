@@ -1,0 +1,18 @@
+Here's an implementation of the `customFibFib` function that is energy efficient:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int) -> int:
+    if n < 0:
+        return 0
+    elif n < 3:
+        return startSequence[n]
+    else:
+        a, b, c = startSequence
+        for i in range(3, n+1):
+            a, b, c = b, c, a + b + c
+            if c > p:
+                return 'Limit Exceeded'
+        return c
+```
+
+This implementation uses a loop to compute the sequence iteratively, which is more energy efficient than using recursion. It also checks for the limit `p` at each step of the loop, so that the computation can be stopped early if the limit is exceeded.

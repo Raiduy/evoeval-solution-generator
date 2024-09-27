@@ -1,0 +1,12 @@
+Here is the Python code that fulfills your request:
+
+```python
+def count_distinct_characters_substrings(string: str, length: int) -> dict:
+    if length > len(string):
+        return {}
+    else:
+        substrings = [string[i: i + length] for i in range(len(string) - length + 1)]
+        return {substring: len(set(substring)) for substring in substrings}
+```
+
+This function first checks if the given length is greater than the length of the string. If it is, it returns an empty dictionary. If it's not, it generates all substrings of the given length from the string. Then, it creates a dictionary where each key is a substring and each value is the count of distinct characters in that substring. The count of distinct characters is found by converting the substring to a set (which removes duplicates) and then getting the length of the set.
