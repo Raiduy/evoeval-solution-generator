@@ -127,21 +127,13 @@ def process_llms(solutions_folder, all_llms, timings_folder, output_folder):
             num_of_executions = get_num_exec(timings_folder, llm, id)
             tmp = pd.DataFrame({'id': id, 'num_of_executions': num_of_executions}, index=[0])
             num_exec_df = pd.concat([num_exec_df, tmp])
-<<<<<<< HEAD:code_maker.py
-
-=======
->>>>>>> main:code_generator.py
             final_code = generate_code(function, code, inputs, num_of_executions)
             export_python_file(output_folder, llm, id, final_code)
             #break
         #break
     num_exec_df = num_exec_df.drop_duplicates()
-<<<<<<< HEAD:code_maker.py
-    num_exec_df.to_csv('./server/num_exec.csv', index=False)
-=======
     num_exec_df.to_csv('./pc/num_exec.csv', index=False)
 
->>>>>>> main:code_generator.py
 
 if __name__ == '__main__':
     solutions_folder = sys.argv[1] # SOLUTIONS_FOLDER
