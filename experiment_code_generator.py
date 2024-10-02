@@ -107,7 +107,7 @@ if __name__ == '__main__':
     device = sys.argv[2]
     experiment = sys.argv[3]
 
-    all_llms = ['gpt-4', 'code-millenials', 'speechless-codellama']
+    all_llms = ['gpt-4', 'code-millenials', 'speechless-codellama', 'chatgpt', 'deepseek-coder']
 
     process_llms(solutions_folder, all_llms, device, experiment)
  

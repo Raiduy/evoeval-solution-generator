@@ -102,9 +102,9 @@ def get_num_exec(path, llm, problem):
                 tmp.append(minutes + seconds)
         runtimes.extend(tmp)
     
-    execs = 1_000_000
-    if problem in ['16', '61', '63', '66', '90']:
-        execs = 1_000
+    execs = 10_000
+    if problem in ['16', '66']:
+        execs = 10
         print(problem, 'hit')
     per_run = statistics.mean(runtimes) / execs
     repetitions = int(MAX_RUNTIME_S / per_run)
@@ -122,6 +122,8 @@ def process_llms(solutions_folder, all_llms, timings_folder, output_folder):
             code_path = f"{solutions_folder}{llm}/{llm}/EvoEval_difficult/EvoEval_{id}/0.py"
             with open(code_path) as reader:
                 code = reader.read()
+                #code = code.split(':\n')[0] + ':\n\tpass'
+                #print(code)
             num_of_executions = get_num_exec(timings_folder, llm, id)
             tmp = pd.DataFrame({'id': id, 'num_of_executions': num_of_executions}, index=[0])
             num_exec_df = pd.concat([num_exec_df, tmp])
