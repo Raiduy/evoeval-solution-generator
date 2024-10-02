@@ -1,0 +1,29 @@
+Here is the Python code for the function `advancedDigitSum(s, t)`:
+
+```python
+def advancedDigitSum(s, t):
+    # Initialize the sums
+    sum_s = 0
+    sum_t = 0
+
+    # Iterate over the characters in s
+    for char in s:
+        # Check if the character is uppercase
+        if char.isupper():
+            # Add the ASCII value of the character to the sum
+            sum_s += ord(char)
+
+    # Iterate over the characters in t
+    for char in t:
+        # Check if the character is lowercase
+        if char.islower():
+            # Add the ASCII value of the character to the sum
+            sum_t += ord(char)
+
+    # Return the sums as a tuple
+    return (sum_s, sum_t)
+```
+
+This function works by iterating over the characters in the input strings and checking if they are of the required case (uppercase for `s`, lowercase for `t`). If a character is of the required case, its ASCII value is added to the corresponding sum. The ASCII value of a character is obtained using the `ord()` function. The sums are then returned as a tuple.
+
+This code is efficient because it only performs a single pass over each string, and the operations performed in each pass (checking the case of a character and adding a number to a sum) are all constant-time. Therefore, the time complexity of this function is linear in the length of the input strings.

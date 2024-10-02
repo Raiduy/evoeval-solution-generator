@@ -32,6 +32,10 @@ def preprocess_response(llm, response, user_prompt=None):
             response = user_prompt + '\n' + response.split('if __name__')[0]
         elif llm == 'speechless-codellama':
             response = user_prompt + '\n' + response
+
+    if user_prompt.split('\n')[0] not in response:
+        response = user_prompt.split('\n')[0] + '\n' + response
+
     print("\nResponse is\n", response)
     return response
 
@@ -55,8 +59,9 @@ def prompt_builder(experiment, model, problem_id, prompts_data):
     user_prompt = prompts_data['user_prompt'][str(problem_id)]
     system_prompt_data = prompts_data['system_prompt']
 
-    if experiment == 'keyword':
+    if experiment in ['keyword', 'platform/raspberry', 'platform/pc', 'platform/server']:
         sys_prompt = system_prompt_data[experiment]
+
     elif experiment == 'guideline':
         sys_prompt = system_prompt_data[experiment]['base_start']
         guideline_counter = 1
@@ -91,8 +96,6 @@ def prompt_builder(experiment, model, problem_id, prompts_data):
     return prompt
     
 
-
-
 def huggingface_call(experiment, prompts_data, model, problem_id):
     endpoint = get_inference_endpoint(models[model])
     messages = prompt_builder(experiment, model, problem_id, prompts_data)
@@ -119,7 +122,8 @@ def openAI_call(experiment, prompts_data, model, problem_id):
     )
     
     response = response.choices[0].message.content
-    write_to_file(experiment, model, problem_id, response)
+    user_prompt = prompts_data['user_prompt'][str(problem_id)]
+    write_to_file(experiment, model, problem_id, response, user_prompt)
 
 
 if __name__ == '__main__':
@@ -147,6 +151,4 @@ if __name__ == '__main__':
         else:
             print("HuggingFace call")
             huggingface_call(experiment, prompts_data, llm, problem)
-
-
 

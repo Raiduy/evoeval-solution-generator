@@ -1,0 +1,19 @@
+Here is an efficient implementation of the `customFibFib` function. This function uses dynamic programming to avoid redundant computations. It also checks if the sum at any point exceeds `p` and immediately returns 'Limit Exceeded' if it does.
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    if n < 3:
+        return startSequence[n]
+
+    fib_sequence = startSequence[:]
+
+    for i in range(3, n + 1):
+        next_value = sum(fib_sequence[-3:])
+        if next_value > p:
+            return 'Limit Exceeded'
+        fib_sequence.append(next_value)
+
+    return fib_sequence[-1]
+```
+
+This function starts by checking if `n` is less than 3. If it is, it returns the corresponding value from the start sequence. Otherwise, it creates a copy of the start sequence and then enters a loop that runs from 3 to `n` inclusive. In each iteration of the loop, it computes the next value in the sequence as the sum of the last three values, checks if this value exceeds `p`, and if it does, it immediately returns 'Limit Exceeded'. If the value does not exceed `p`, it appends it to the sequence. Finally, it returns the last value in the sequence, which is the `n`-th element.

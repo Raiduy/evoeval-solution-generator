@@ -1,0 +1,14 @@
+Here is the completed code:
+
+```python
+def add_elements(list1: list, list2: list, index: int) -> tuple:
+    try:
+        result = list1[index] + list2[index]
+        return result, False
+    except IndexError:
+        return None, True
+```
+
+This function tries to add the elements at the given index from both lists. If it succeeds, it returns the result and `False` indicating that no exception occurred. If an `IndexError` occurs (which means that the index was out of range for one or both of the lists), it returns `None` and `True` indicating that an exception occurred.
+
+This code is efficient because it only performs the addition operation once and immediately returns the result if it is successful. If an exception occurs, it is caught and handled immediately, preventing the program from crashing and allowing it to continue running. The use of a tuple to return multiple values is also efficient, as it avoids the need for multiple return statements or a more complex data structure.

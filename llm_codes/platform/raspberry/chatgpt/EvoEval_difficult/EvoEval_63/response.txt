@@ -1,0 +1,26 @@
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    if n == 0:
+        return startSequence[0]
+    elif n == 1:
+        return startSequence[1]
+    elif n == 2:
+        return startSequence[2]
+    
+    a, b, c = startSequence
+    fib = [a, b, c]
+    
+    for i in range(3, n+1):
+        next_val = fib[i-1] + fib[i-2] + fib[i-3]
+        if next_val > p:
+            return 'Limit Exceeded'
+        fib.append(next_val)
+    
+    return fib[n]
+
+# Test cases
+print(customFibFib(1, [1, 1, 2], 1000))  # Output: 1
+print(customFibFib(5, [-1, 0, 1], 1000))  # Output: 2
+print(customFibFib(8, [0, 1, 2], 5))  # Output: 'Limit Exceeded'
+```
+This implementation efficiently computes the n-th element of the CustomFibFib sequence while checking for the limit 'p' at each step.

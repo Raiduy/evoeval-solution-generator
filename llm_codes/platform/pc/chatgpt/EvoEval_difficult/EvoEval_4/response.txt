@@ -1,0 +1,23 @@
+Here is the completed code for the `weighted_mean_absolute_deviation` function:
+
+```python
+from typing import List, Tuple
+
+
+def weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:
+    total_weight = sum(w for _, w in numbers)
+    
+    if total_weight != 1 or any(w <= 0 for _, w in numbers):
+        return "Weights must be positive and sum to 1"
+    
+    weighted_mean = sum(x * w for x, w in numbers)
+    wmad = sum(w * abs(x - weighted_mean) for x, w in numbers) / total_weight
+    
+    return wmad
+
+
+# Test the function
+print(weighted_mean_absolute_deviation([(1.0, 0.1), (2.0, 0.2), (3.0, 0.3), (4.0, 0.4)]))  # Output should be 0.8
+```
+
+This code calculates the Weighted Mean Absolute Deviation for a given list of tuples as described in the function docstring. It checks if the weights are positive and sum to 1 before performing the calculation. The completed function includes the calculation logic and the necessary checks.

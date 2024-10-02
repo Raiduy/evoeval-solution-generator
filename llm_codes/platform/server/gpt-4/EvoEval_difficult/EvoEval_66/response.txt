@@ -1,0 +1,15 @@
+Here is the Python code for the function `advancedDigitSum(s, t)`. This function uses list comprehension and the built-in `ord()` function to calculate the ASCII sum. It also uses the `isupper()` and `islower()` methods to filter out the characters that are not of the required case.
+
+```python
+def advancedDigitSum(s, t):
+    # Calculate the sum of ASCII codes of the uppercase characters in 's'
+    s_sum = sum(ord(c) for c in s if c.isupper())
+    
+    # Calculate the sum of ASCII codes of the lowercase characters in 't'
+    t_sum = sum(ord(c) for c in t if c.islower())
+    
+    # Return the results as a tuple
+    return (s_sum, t_sum)
+```
+
+This code is efficient because it only iterates through each string once. It also makes good use of Python's built-in functions and methods, which are typically optimized for performance.

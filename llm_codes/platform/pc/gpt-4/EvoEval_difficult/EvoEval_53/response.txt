@@ -1,0 +1,14 @@
+Here is the completed code:
+
+```python
+def add_elements(list1: list, list2: list, index: int) -> tuple:
+    try:
+        result = list1[index] + list2[index]
+        return result, False
+    except IndexError:
+        return None, True
+```
+
+This function tries to add elements from `list1` and `list2` at the given `index`. If the index is out of range for either of the lists, it catches the `IndexError` exception and returns `None` for the result and `True` for the exception occurrence. If no exception occurs, it returns the sum and `False` for the exception occurrence.
+
+This code is efficient as it uses exception handling to deal with out-of-range indices, avoiding unnecessary checks or iterations. It also makes good use of Python's dynamic typing and tuple return capability.
