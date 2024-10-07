@@ -1,0 +1,24 @@
+{
+    "keyword": {
+        "speechless-codellama": [
+            "52",
+            "61"
+        ]
+    },
+    "platform/pc": {
+        "chatgpt": []
+    },
+    "platform/server": {
+        "gpt-4": []
+    },
+    "platform/raspberry": {
+        "chatgpt": []
+    },
+    "guideline": {
+        "speechless-codellama": [
+            "52",
+            "61",
+            "90"
+        ]
+    }
+}
