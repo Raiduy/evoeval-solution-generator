@@ -1,4 +1,4 @@
-
+from typing import List, Tuple
 
 def weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:
     # Calculate the weighted mean
