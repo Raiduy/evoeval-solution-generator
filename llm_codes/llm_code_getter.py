@@ -1,3 +1,4 @@
+from dataclasses import replace
 import os
 import json
 import sys
@@ -24,7 +25,7 @@ hf_prompt_template = """{sys_prompt}
 """
 
 
-def preprocess_response(llm, response, user_prompt=None):
+def preprocess_response(llm, response, user_prompt):
     if '```python' in response:
         response = response.split('```python')[1].split('```')[0]
     else:
@@ -40,7 +41,7 @@ def preprocess_response(llm, response, user_prompt=None):
     return response
 
 
-def write_to_file(experiment, llm, code_id, response, user_prompt=None):
+def write_to_file(experiment, llm, code_id, response, user_prompt):
     out_folder = f'./{experiment}/{llm}/EvoEval_difficult/EvoEval_{code_id}'
     if not os.path.isdir(out_folder):
         os.makedirs(out_folder)
@@ -58,6 +59,7 @@ def write_to_file(experiment, llm, code_id, response, user_prompt=None):
 def prompt_builder(experiment, model, problem_id, prompts_data):
     user_prompt = prompts_data['user_prompt'][str(problem_id)]
     system_prompt_data = prompts_data['system_prompt']
+    sys_prompt = ""
 
     if experiment in ['keyword', 'platform/raspberry', 'platform/pc', 'platform/server']:
         sys_prompt = system_prompt_data[experiment]
@@ -71,6 +73,16 @@ def prompt_builder(experiment, model, problem_id, prompts_data):
                 guideline_counter += 1
         sys_prompt += system_prompt_data[experiment]['base_end']
 
+    elif experiment == 'few-shot':
+        starter = system_prompt_data[experiment]['base_start']
+        examples_counter = 0
+        for guideline_category in system_prompt_data[experiment]['problem'][str(problem_id)]:
+            examples_counter += 1
+            sys_prompt += system_prompt_data[experiment]['unoptimized'] + '\n'
+            sys_prompt += system_prompt_data[experiment]['optimized'][guideline_category] + '\n'
+        starter = starter.replace('{n}',str(examples_counter))
+        starter = starter.replace('{problem_name}', user_prompt.split('def ')[1].split('(')[0])
+        sys_prompt = starter + sys_prompt
 
     if model in ['gpt-4', 'chatgpt', 'deepseek-coder']:
         prompt = [
@@ -92,7 +104,7 @@ def prompt_builder(experiment, model, problem_id, prompts_data):
     else:
         return "Broken"
 
-    print("\nPrompt is\n", prompt)
+    print("*****************************\nPrompt is\n", prompt, "\n********************************\n\n\n")
     return prompt
     
 
