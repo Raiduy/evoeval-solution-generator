@@ -1,0 +1,40 @@
+To optimize the `advancedDigitSum` function for energy efficiency, we can focus on reducing the number of operations and avoiding unnecessary computations. Here’s an optimized version of the function:
+
+```python
+def advancedDigitSum(s, t):
+    """
+    Optimized function to calculate the sum of ASCII codes of uppercase characters in 's'
+    and lowercase characters in 't'.
+    """
+    sum_s = 0
+    sum_t = 0
+    
+    # Calculate sum for string 's'
+    for char in s:
+        if 'A' <= char <= 'Z':
+            sum_s += ord(char)
+    
+    # Calculate sum for string 't'
+    for char in t:
+        if 'a' <= char <= 'z':
+            sum_t += ord(char)
+    
+    return (sum_s, sum_t)
+
+# Example usage:
+print(advancedDigitSum("", "abc"))        # Output: (0, 294)
+print(advancedDigitSum("abAB", "abc"))    # Output: (131, 294)
+print(advancedDigitSum("abcCd", ""))      # Output: (67, 0)
+print(advancedDigitSum("helloE", "abc"))  # Output: (69, 294)
+print(advancedDigitSum("woArBld", "xyz")) # Output: (131, 363)
+print(advancedDigitSum("aAaaaXa", ",.!")) # Output: (153, 0)
+```
+
+### Explanation:
+1. **Direct Character Comparison**: Instead of using `str.isupper()` and `str.islower()`, we directly compare the characters with their respective ASCII ranges (`'A' <= char <= 'Z'` for uppercase and `'a' <= char <= 'z'` for lowercase). This avoids the overhead of function calls and is more efficient.
+  
+2. **Single Pass Through Each String**: We iterate through each string only once, which minimizes the number of operations.
+
+3. **Avoid Unnecessary Computations**: By checking the character range first, we ensure that only relevant characters contribute to the sum, avoiding unnecessary `ord()` calls for non-alphanumeric characters.
+
+This approach ensures that the function is both time-efficient and energy-efficient, making it suitable for handling larger strings or frequent calls.

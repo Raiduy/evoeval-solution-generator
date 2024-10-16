@@ -36,6 +36,9 @@ def preprocess_response(llm, response, user_prompt):
 
     if user_prompt.split('\n')[0] not in response:
         response = user_prompt.split('\n')[0] + '\n' + response
+    
+    if 'print(' in response:
+        response = response.split('print(')[0]
 
     print("\nResponse is\n", response)
     return response

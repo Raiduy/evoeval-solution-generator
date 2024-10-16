@@ -5,25 +5,25 @@
             "61"
         ]
     },
-    "few-shot": {
-        "gpt-4": [
-            "53"
-        ]
-    },
-    "platform/pc": {
-        "chatgpt": []
-    },
-    "platform/server": {
-        "gpt-4": []
-    },
-    "platform/raspberry": {
-        "chatgpt": []
-    },
     "guideline": {
         "speechless-codellama": [
             "52",
             "61",
             "90"
         ]
+    },
+    "few-shot": {
+        "deepseek-coder": [
+            "79"
+        ]
+    },
+    "platform/raspberry": {
+        "chatgpt": []
+    },
+    "platform/server": {
+        "gpt-4": []
+    },
+    "platform/pc": {
+        "chatgpt": []
     }
 }

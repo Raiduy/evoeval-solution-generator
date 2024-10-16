@@ -1,0 +1,45 @@
+To optimize the `decimal_to_binary` function for energy efficiency, we can focus on reducing the number of operations and ensuring that the function handles edge cases gracefully. Here’s an optimized version of the function:
+
+```python
+def decimal_to_binary(decimal, padding_length):
+    """
+    Converts a decimal number to a binary string with a specified padding length.
+    The binary string is prefixed and suffixed with 'db'.
+    """
+    # Validate inputs
+    if not isinstance(decimal, int) or not isinstance(padding_length, int) or decimal < 0 or padding_length <= 0:
+        return "Invalid Input"
+    
+    # Convert decimal to binary
+    binary_str = bin(decimal)[2:]  # bin() returns a string prefixed with '0b', so we slice it off
+    
+    # Check if padding length is sufficient
+    if len(binary_str) > padding_length:
+        return "Padding length is too small"
+    
+    # Pad the binary string with leading zeros
+    padded_binary_str = binary_str.zfill(padding_length)
+    
+    # Add the 'db' prefix and suffix
+    result = f"db{padded_binary_str}db"
+    
+    return result
+
+# Examples
+print(decimal_to_binary(15, 5))   # returns "db01111db"
+print(decimal_to_binary(32, 5))   # returns "Padding length is too small"
+print(decimal_to_binary(32, 10))  # returns "db0000100000db"
+```
+
+### Explanation:
+1. **Input Validation**: The function first checks if the inputs are valid. It ensures that `decimal` is a non-negative integer and `padding_length` is a positive integer. If not, it returns "Invalid Input".
+
+2. **Binary Conversion**: The `bin()` function is used to convert the decimal number to a binary string. The `[2:]` slice removes the '0b' prefix that `bin()` adds.
+
+3. **Padding Check**: The function checks if the length of the binary string exceeds the `padding_length`. If it does, the function returns "Padding length is too small".
+
+4. **Padding**: The `zfill()` method is used to pad the binary string with leading zeros to meet the required `padding_length`.
+
+5. **Formatting**: The formatted binary string is prefixed and suffixed with 'db'.
+
+This approach minimizes unnecessary operations and ensures that the function is both efficient and easy to understand.

@@ -1,0 +1,37 @@
+To create an energy-efficient version of the `customFibFib` function, we can leverage dynamic programming to avoid redundant calculations and early termination to prevent unnecessary computations when the limit is exceeded. Here's an optimized implementation:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    """
+    Efficiently computes the n-th element of the CustomFibFib sequence with early termination if the sum exceeds 'p'.
+
+    :param n: The position in the sequence to compute.
+    :param startSequence: A list of three starting values [a, b, c].
+    :param p: The limit for the sum of the sequence elements.
+    :return: The n-th element of the sequence or 'Limit Exceeded' if the sum exceeds 'p'.
+    """
+    if n < 3:
+        return startSequence[n]
+
+    a, b, c = startSequence
+    for i in range(3, n + 1):
+        next_value = a + b + c
+        if next_value > p:
+            return 'Limit Exceeded'
+        a, b, c = b, c, next_value
+
+    return c
+
+# Test cases
+print(customFibFib(1, [1, 1, 2], 1000))  # Output: 1
+print(customFibFib(5, [-1, 0, 1], 1000))  # Output: 2
+print(customFibFib(8, [0, 1, 2], 5))      # Output: 'Limit Exceeded'
+```
+
+### Explanation:
+1. **Base Cases**: If `n` is less than 3, we directly return the corresponding element from the `startSequence`.
+2. **Iterative Calculation**: For `n >= 3`, we iteratively compute the next value in the sequence using the formula `next_value = a + b + c`.
+3. **Early Termination**: If at any point the computed `next_value` exceeds `p`, the function immediately returns `'Limit Exceeded'`.
+4. **Efficient Update**: We update the values of `a`, `b`, and `c` in each iteration to avoid redundant calculations.
+
+This approach ensures that the function is both time and space efficient, and it stops computation as soon as the limit is exceeded, saving energy and computational resources.
