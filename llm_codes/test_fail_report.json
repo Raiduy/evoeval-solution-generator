@@ -23,5 +23,19 @@
             "61",
             "90"
         ]
+    },
+    "few-shot": {
+        "deepseek-coder": [
+            "79"
+        ]
+    },
+    "platform/raspberry": {
+        "chatgpt": []
+    },
+    "platform/server": {
+        "gpt-4": []
+    },
+    "platform/pc": {
+        "chatgpt": []
     }
 }
