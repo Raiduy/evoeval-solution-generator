@@ -6,9 +6,7 @@
         ]
     },
     "few-shot": {
-        "gpt-4": [
-            "53"
-        ]
+        "chatgpt": []
     },
     "platform/pc": {
         "chatgpt": []
