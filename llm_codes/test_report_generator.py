@@ -23,23 +23,18 @@ def parsejson(json_path):
 
 
 def generate_report():
-    report = {}
+    report = ''
     
     for root, dirs, files in os.walk("./"):
         for file in files:
             if file.endswith("_pretty.json"):
                 filepath = os.path.join(root, file)
-                
+
                 experiment, llm, failed = parsejson(filepath)
-                tmp = {}
-                tmp[llm] = failed
-                report[experiment] = tmp
+                report += f'{experiment}\t{llm}\t{failed}\n'
 
-    json_string = json.dumps(report, indent=4)
-
-    with open("./test_fail_report.json", "w") as outfile: 
-        outfile.write(json_string)
-        #json.dump(json_string, outfile, indent=4)
+    with open("./test_fail_report.tsv", "w") as outfile: 
+        outfile.write(report)
     
 
 if __name__ == '__main__':
