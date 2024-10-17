@@ -1,0 +1,49 @@
+To implement the `customFibFib` function efficiently, we can use an iterative approach to avoid the exponential time complexity of a recursive solution. This approach will also allow us to check the limit condition (`p`) efficiently at each step.
+
+Here's the implementation:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    # Ensure the startSequence has exactly 3 elements
+    if len(startSequence) != 3:
+        raise ValueError("startSequence must contain exactly 3 elements")
+    
+    # Handle the base cases directly
+    if n == 0:
+        return startSequence[0]
+    elif n == 1:
+        return startSequence[1]
+    elif n == 2:
+        return startSequence[2]
+    
+    # Initialize the first three elements of the sequence
+    a, b, c = startSequence
+    
+    # Iterate to compute the n-th element
+    for i in range(3, n + 1):
+        # Calculate the next element in the sequence
+        next_value = a + b + c
+        
+        # Check if the next value exceeds the limit
+        if next_value > p:
+            return 'Limit Exceeded'
+        
+        # Update the sequence values for the next iteration
+        a, b, c = b, c, next_value
+    
+    # Return the n-th element
+    return c
+
+# Test cases
+print(customFibFib(1, [1, 1, 2], 1000))  # Output: 1
+print(customFibFib(5, [-1, 0, 1], 1000))  # Output: 2
+print(customFibFib(8, [0, 1, 2], 5))      # Output: 'Limit Exceeded'
+```
+
+### Explanation:
+1. **Base Cases**: We handle the first three elements directly using the `startSequence`.
+2. **Iterative Calculation**: We use a loop to compute the sequence iteratively, updating the values of `a`, `b`, and `c` at each step.
+3. **Limit Check**: Before updating the sequence, we check if the next value exceeds the limit `p`. If it does, we return `'Limit Exceeded'`.
+4. **Efficiency**: This approach ensures that we only compute the necessary elements and stop early if the limit is exceeded, making it both time and space efficient.
+
+This implementation should work well on a Raspberry Pi, given its hardware constraints, by avoiding unnecessary computations and memory usage.

@@ -1,0 +1,94 @@
+{
+    "eval": {
+        "EvoEval/90": [
+            {
+                "task_id": "EvoEval/90",
+                "solution": "\ndef next_smallest_and_largest(lst):\n    if len(lst) < 2:\n        return (None, None)\n\n    smallest = second_smallest = float('inf')\n    largest = second_largest = float('-inf')\n\n    for num in lst:\n        if num < smallest:\n            second_smallest = smallest\n            smallest = num\n        elif num < second_smallest and num != smallest:\n            second_smallest = num\n\n        if num > largest:\n            second_largest = largest\n            largest = num\n        elif num > second_largest and num != largest:\n            second_largest = num\n\n    if second_smallest == float('inf') or second_largest == float('-inf'):\n        return (None, None)\n\n    return (second_smallest, second_largest)\n\n# Test cases\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/52": [
+            {
+                "task_id": "EvoEval/52",
+                "solution": "def below_above_threshold(l: list, t1: int, t2: int, s: str):\n    if s == 'below':\n        for i in range(len(l)):\n            if l[i] >= t1:\n                return i\n        return True\n    elif s == 'above':\n        for i in range(len(l)):\n            if l[i] <= t2:\n                return i\n        return True\n    else:\n        return -1\n\n# Testing the function with the provided test cases\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/63": [
+            {
+                "task_id": "EvoEval/63",
+                "solution": "\ndef customFibFib(n: int, startSequence: list, p: int):\n    if n == 0:\n        return startSequence[0]\n    elif n == 1:\n        return startSequence[1]\n    elif n == 2:\n        return startSequence[2]\n    \n    a, b, c = startSequence\n    fib = [a, b, c]\n    \n    for i in range(3, n+1):\n        next_val = fib[i-1] + fib[i-2] + fib[i-3]\n        if next_val > p:\n            return 'Limit Exceeded'\n        fib.append(next_val)\n    \n    return fib[n]\n\n# Test cases\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/61": [
+            {
+                "task_id": "EvoEval/61",
+                "solution": "\ndef correct_bracketing_advanced(brackets: str):\n    stack = []\n    mapping = {\")\": \"(\", \"}\": \"{\", \"]\": \"[\"}\n\n    for bracket in brackets:\n        if bracket in mapping.values():\n            stack.append(bracket)\n        elif bracket in mapping.keys():\n            if not stack or mapping[bracket] != stack.pop():\n                return False\n\n    return not stack\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/79": [
+            {
+                "task_id": "EvoEval/79",
+                "solution": "\ndef decimal_to_binary(decimal, padding_length):\n    if not isinstance(decimal, int) or not isinstance(padding_length, int) or decimal < 0 or padding_length < 0:\n        return \"Invalid Input\"\n\n    binary = bin(decimal)[2:]\n    if len(binary) > padding_length:\n        return \"Padding length is too small\"\n    \n    binary = '0' * (padding_length - len(binary)) + binary\n    return f\"db{binary}db\"\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/4": [
+            {
+                "task_id": "EvoEval/4",
+                "solution": "from typing import List, Tuple\n\nfrom typing import List, Tuple\n\ndef weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:\n    total_weight = sum(w for _, w in numbers)\n    \n    if total_weight != 1 or any(w <= 0 for _, w in numbers):\n        return \"Weights must be positive and sum to 1\"\n    \n    weighted_mean = sum(x * w for x, w in numbers)\n    wmad = sum(w * abs(x - weighted_mean) for x, w in numbers) / total_weight\n    \n    return wmad\n\n# Test the function\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/53": [
+            {
+                "task_id": "EvoEval/53",
+                "solution": "\ndef add_elements(list1: list, list2: list, index: int):\n    try:\n        result = list1[index] + list2[index]\n        exception_occurred = False\n    except IndexError:\n        result = None\n        exception_occurred = True\n\n    return result, exception_occurred\n\n# Test cases\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/66": [
+            {
+                "task_id": "EvoEval/66",
+                "solution": "def advancedDigitSum(s, t):\n    sum_s = sum(ord(char) for char in s if char.isupper())\n    sum_t = sum(ord(char) for char in t if char.islower())\n    \n    return (sum_s, sum_t)",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/16": [
+            {
+                "task_id": "EvoEval/16",
+                "solution": "def count_distinct_characters_substrings(string: str, length: int) -> dict:\n    if length > len(string):\n        return {}\n\n    result = {}\n    for i in range(len(string) - length + 1):\n        substring = string[i:i+length]\n        distinct_chars = len(set(substring))\n        result[substring] = distinct_chars\n\n    return result\n\n# Testing the function with the provided examples\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ]
+    }
+}

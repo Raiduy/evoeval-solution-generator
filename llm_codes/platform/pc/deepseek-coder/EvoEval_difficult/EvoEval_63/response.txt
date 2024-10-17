@@ -1,0 +1,43 @@
+To implement the `customFibFib` function efficiently, we can use an iterative approach with memoization to avoid redundant calculations and ensure that the function runs in linear time relative to `n`. This approach will also help in checking the limit `p` efficiently without unnecessary computations.
+
+Here's the implementation:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    """
+    Compute the n-th element of the CustomFibFib sequence with the given starting sequence and limit p.
+
+    :param n: The position in the sequence to compute.
+    :param startSequence: A list of three integers [a, b, c] representing the starting values.
+    :param p: The limit for the sequence values.
+    :return: The n-th element of the sequence or 'Limit Exceeded' if the sum exceeds p.
+    """
+    if n < 3:
+        return startSequence[n]
+
+    # Initialize the first three elements of the sequence
+    a, b, c = startSequence
+
+    # Iteratively compute the sequence up to the n-th element
+    for i in range(3, n + 1):
+        next_value = a + b + c
+        if next_value > p:
+            return 'Limit Exceeded'
+        # Shift the values to the left
+        a, b, c = b, c, next_value
+
+    return c
+
+# Test cases
+print(customFibFib(1, [1, 1, 2], 1000))  # Output: 1
+print(customFibFib(5, [-1, 0, 1], 1000))  # Output: 2
+print(customFibFib(8, [0, 1, 2], 5))      # Output: 'Limit Exceeded'
+```
+
+### Explanation:
+1. **Base Cases**: If `n` is less than 3, we directly return the corresponding element from the `startSequence`.
+2. **Initialization**: We initialize the first three elements of the sequence using the values from `startSequence`.
+3. **Iterative Calculation**: We use a loop to compute the sequence up to the `n`-th element. In each iteration, we calculate the next value as the sum of the last three values. If this sum exceeds `p`, we immediately return `'Limit Exceeded'`.
+4. **Shifting Values**: After computing the next value, we shift the values to the left to prepare for the next iteration.
+
+This approach ensures that the function runs in O(n) time and uses O(1) additional space, making it efficient both in terms of time and memory usage.

@@ -1,0 +1,41 @@
+To implement the `customFibFib` function efficiently, we can use an iterative approach to avoid the exponential time complexity of a recursive solution. This approach will also allow us to check the limit condition (`p`) efficiently without unnecessary computations.
+
+Here's the implementation:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    """
+    Compute the n-th element of the CustomFibFib sequence.
+
+    :param n: The position in the sequence to compute.
+    :param startSequence: A list of three starting values [a, b, c].
+    :param p: The limit for the sum of the sequence elements.
+    :return: The n-th element of the sequence or 'Limit Exceeded' if the sum exceeds p.
+    """
+    if n < 3:
+        return startSequence[n]
+
+    a, b, c = startSequence
+    for i in range(3, n + 1):
+        next_value = a + b + c
+        if next_value > p:
+            return 'Limit Exceeded'
+        a, b, c = b, c, next_value
+
+    return c
+
+# Example usage:
+print(customFibFib(1, [1, 1, 2], 1000))  # Output: 1
+print(customFibFib(5, [-1, 0, 1], 1000))  # Output: 2
+print(customFibFib(8, [0, 1, 2], 5))      # Output: 'Limit Exceeded'
+```
+
+### Explanation:
+1. **Base Cases**: If `n` is less than 3, we directly return the corresponding element from the `startSequence`.
+2. **Iterative Calculation**: For `n >= 3`, we initialize the first three values from the `startSequence` and iterate from 3 to `n`.
+3. **Sum Calculation**: In each iteration, we calculate the next value in the sequence as the sum of the last three values.
+4. **Limit Check**: If the sum exceeds `p`, we immediately return `'Limit Exceeded'`.
+5. **Update Values**: We update the values of `a`, `b`, and `c` to the next three values in the sequence.
+6. **Return Result**: After the loop, `c` will hold the n-th value of the sequence, which we return.
+
+This approach ensures that the function runs in linear time `O(n)` and uses constant space `O(1)`, making it efficient and suitable for the given server configuration.

@@ -1,0 +1,39 @@
+To implement the `advancedDigitSum` function, we need to iterate through each string and sum the ASCII values of the characters that match the required case (uppercase for `s` and lowercase for `t`). We will use Python's built-in `ord` function to get the ASCII value of a character.
+
+Here's the implementation:
+
+```python
+def advancedDigitSum(s, t):
+    # Initialize sums for both strings
+    sum_s = 0
+    sum_t = 0
+    
+    # Sum ASCII values of uppercase characters in string 's'
+    for char in s:
+        if char.isupper():
+            sum_s += ord(char)
+    
+    # Sum ASCII values of lowercase characters in string 't'
+    for char in t:
+        if char.islower():
+            sum_t += ord(char)
+    
+    # Return the results as a tuple
+    return (sum_s, sum_t)
+
+# Example usage:
+print(advancedDigitSum("", "abc"))        # Output: (0, 294)
+print(advancedDigitSum("abAB", "abc"))    # Output: (131, 294)
+print(advancedDigitSum("abcCd", ""))      # Output: (67, 0)
+print(advancedDigitSum("helloE", "abc"))  # Output: (69, 294)
+print(advancedDigitSum("woArBld", "xyz")) # Output: (131, 363)
+print(advancedDigitSum("aAaaaXa", ",.!")) # Output: (153, 0)
+```
+
+### Explanation:
+1. **Initialization**: We start by initializing `sum_s` and `sum_t` to 0. These will hold the sums of ASCII values for uppercase and lowercase characters, respectively.
+2. **Iterate through `s`**: For each character in `s`, we check if it is uppercase using `char.isupper()`. If it is, we add its ASCII value to `sum_s`.
+3. **Iterate through `t`**: Similarly, for each character in `t`, we check if it is lowercase using `char.islower()`. If it is, we add its ASCII value to `sum_t`.
+4. **Return the result**: Finally, we return a tuple containing `sum_s` and `sum_t`.
+
+This implementation is efficient and straightforward, leveraging Python's built-in string methods to check the case of characters and the `ord` function to get their ASCII values.

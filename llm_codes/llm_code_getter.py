@@ -34,7 +34,7 @@ def preprocess_response(llm, response, user_prompt):
         elif llm == 'speechless-codellama':
             response = user_prompt + '\n' + response
 
-    if user_prompt.split('\n')[0] not in response:
+    if user_prompt.split(':\n')[0] not in response:
         response = user_prompt.split('\n')[0] + '\n' + response
     
     if 'print(' in response:

@@ -1,0 +1,43 @@
+To implement the `advancedDigitSum` function, we need to iterate through each string and sum the ASCII values of the characters that match the required case (uppercase for `s` and lowercase for `t`). We will ignore non-alphanumeric characters. Here's the implementation:
+
+```python
+def advancedDigitSum(s, t):
+    """
+    Calculate the sum of ASCII codes for uppercase characters in 's' and lowercase characters in 't'.
+
+    :param s: A string containing any characters.
+    :param t: A string containing any characters.
+    :return: A tuple (sum_s, sum_t) where sum_s is the sum of ASCII codes of uppercase characters in 's'
+             and sum_t is the sum of ASCII codes of lowercase characters in 't'.
+    """
+    sum_s = sum(ord(char) for char in s if char.isupper())
+    sum_t = sum(ord(char) for char in t if char.islower())
+    
+    return (sum_s, sum_t)
+
+# Example usage:
+print(advancedDigitSum("", "abc"))        # Output: (0, 294)
+print(advancedDigitSum("abAB", "abc"))    # Output: (131, 294)
+print(advancedDigitSum("abcCd", ""))      # Output: (67, 0)
+print(advancedDigitSum("helloE", "abc"))  # Output: (69, 294)
+print(advancedDigitSum("woArBld", "xyz")) # Output: (131, 363)
+print(advancedDigitSum("aAaaaXa", ",.!")) # Output: (153, 0)
+```
+
+### Explanation:
+1. **Sum Calculation for `s`**:
+   - We use a generator expression inside the `sum` function to iterate over each character in `s`.
+   - The `char.isupper()` method checks if the character is uppercase.
+   - The `ord(char)` function returns the ASCII value of the character.
+   - The sum of these ASCII values is stored in `sum_s`.
+
+2. **Sum Calculation for `t`**:
+   - Similarly, we use a generator expression inside the `sum` function to iterate over each character in `t`.
+   - The `char.islower()` method checks if the character is lowercase.
+   - The `ord(char)` function returns the ASCII value of the character.
+   - The sum of these ASCII values is stored in `sum_t`.
+
+3. **Return Statement**:
+   - The function returns a tuple `(sum_s, sum_t)`.
+
+This implementation is efficient and leverages Python's built-in functions to handle the task concisely and effectively.

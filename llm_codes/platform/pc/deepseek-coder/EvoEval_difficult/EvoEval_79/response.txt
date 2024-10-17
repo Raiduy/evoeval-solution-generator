@@ -1,0 +1,46 @@
+To complete the `decimal_to_binary` function, we need to follow these steps:
+
+1. Validate the input to ensure both `decimal` and `padding_length` are positive integers.
+2. Convert the decimal number to its binary representation.
+3. Check if the binary representation fits within the specified `padding_length`.
+4. Pad the binary string with leading zeros if necessary.
+5. Add the 'db' characters at the beginning and end of the string.
+6. Return the appropriate result based on the checks.
+
+Here's the completed function:
+
+```python
+def decimal_to_binary(decimal, padding_length):
+    # Validate inputs
+    if not isinstance(decimal, int) or not isinstance(padding_length, int) or decimal < 0 or padding_length <= 0:
+        return "Invalid Input"
+    
+    # Convert decimal to binary
+    binary_str = bin(decimal)[2:]  # bin() returns a string like '0b1010', so we slice off the '0b'
+    
+    # Check if the binary representation fits within the padding length
+    if len(binary_str) > padding_length:
+        return "Padding length is too small"
+    
+    # Pad the binary string with leading zeros
+    padded_binary_str = binary_str.zfill(padding_length)
+    
+    # Add 'db' at the beginning and end
+    result = f"db{padded_binary_str}db"
+    
+    return result
+
+# Example usage:
+print(decimal_to_binary(15, 5))   # returns "db01111db"
+print(decimal_to_binary(32, 5))   # returns "Padding length is too small"
+print(decimal_to_binary(32, 10))  # returns "db0000100000db"
+```
+
+### Explanation:
+1. **Input Validation**: The function first checks if both `decimal` and `padding_length` are positive integers. If not, it returns "Invalid Input".
+2. **Binary Conversion**: The `bin()` function converts the decimal number to a binary string, and `[2:]` slices off the '0b' prefix.
+3. **Padding Check**: It checks if the length of the binary string exceeds the `padding_length`. If it does, the function returns "Padding length is too small".
+4. **Padding**: The `zfill()` method pads the binary string with leading zeros to ensure it meets the required length.
+5. **Formatting**: The formatted string is constructed by adding 'db' at the beginning and end.
+
+This approach ensures that the function is both efficient and easy to understand, leveraging Python's built-in functions for optimal performance.

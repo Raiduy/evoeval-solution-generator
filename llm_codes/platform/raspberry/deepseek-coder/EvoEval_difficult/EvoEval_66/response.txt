@@ -1,0 +1,46 @@
+Certainly! Below is the implementation of the `advancedDigitSum` function, which is optimized for performance and resource efficiency on a Raspberry Pi with the specified hardware configuration.
+
+```python
+def advancedDigitSum(s, t):
+    """
+    Calculate the sum of ASCII codes for uppercase characters in 's' and lowercase characters in 't'.
+
+    Args:
+        s (str): The first input string.
+        t (str): The second input string.
+
+    Returns:
+        tuple: A tuple containing the sum of ASCII codes for uppercase characters in 's' and lowercase characters in 't'.
+    """
+    # Initialize sums for both strings
+    sum_s = 0
+    sum_t = 0
+
+    # Calculate the sum of ASCII codes for uppercase characters in 's'
+    for char in s:
+        if 'A' <= char <= 'Z':
+            sum_s += ord(char)
+
+    # Calculate the sum of ASCII codes for lowercase characters in 't'
+    for char in t:
+        if 'a' <= char <= 'z':
+            sum_t += ord(char)
+
+    return (sum_s, sum_t)
+
+# Example usage:
+print(advancedDigitSum("", "abc"))       # Output: (0, 294)
+print(advancedDigitSum("abAB", "abc"))   # Output: (131, 294)
+print(advancedDigitSum("abcCd", ""))     # Output: (67, 0)
+print(advancedDigitSum("helloE", "abc")) # Output: (69, 294)
+print(advancedDigitSum("woArBld", "xyz"))# Output: (131, 363)
+print(advancedDigitSum("aAaaaXa", ",.!"))# Output: (153, 0)
+```
+
+### Explanation:
+1. **Initialization**: We initialize two variables `sum_s` and `sum_t` to store the sums of ASCII codes for uppercase and lowercase characters, respectively.
+2. **Iterate through `s`**: We iterate through each character in the string `s`. If the character is an uppercase letter (checked using the condition `'A' <= char <= 'Z'`), we add its ASCII value to `sum_s`.
+3. **Iterate through `t`**: Similarly, we iterate through each character in the string `t`. If the character is a lowercase letter (checked using the condition `'a' <= char <= 'z'`), we add its ASCII value to `sum_t`.
+4. **Return the result**: Finally, we return a tuple containing `sum_s` and `sum_t`.
+
+This implementation is efficient in terms of both time and space complexity, making it suitable for execution on a Raspberry Pi with the given hardware configuration.

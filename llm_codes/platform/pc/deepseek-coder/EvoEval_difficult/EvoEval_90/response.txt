@@ -1,0 +1,53 @@
+To achieve the desired functionality with a time complexity of O(n), we can iterate through the list once to find the 2nd smallest and 2nd largest elements. Here's how you can implement the `next_smallest_and_largest` function:
+
+```python
+def next_smallest_and_largest(lst):
+    """
+    Returns a tuple of the 2nd smallest and the 2nd largest elements of the list.
+    Returns None if there is no such element.
+    """
+    if len(lst) < 2:
+        return (None, None)
+    
+    # Initialize variables to track the smallest, 2nd smallest, largest, and 2nd largest elements
+    smallest = float('inf')
+    second_smallest = float('inf')
+    largest = float('-inf')
+    second_largest = float('-inf')
+    
+    for num in lst:
+        if num < smallest:
+            second_smallest = smallest
+            smallest = num
+        elif num < second_smallest and num != smallest:
+            second_smallest = num
+        
+        if num > largest:
+            second_largest = largest
+            largest = num
+        elif num > second_largest and num != largest:
+            second_largest = num
+    
+    # Check if we have valid 2nd smallest and 2nd largest elements
+    if second_smallest == float('inf'):
+        second_smallest = None
+    if second_largest == float('-inf'):
+        second_largest = None
+    
+    return (second_smallest, second_largest)
+
+# Test cases
+print(next_smallest_and_largest([1, 2, 3, 4, 5]))  # (2, 4)
+print(next_smallest_and_largest([5, 1, 4, 3, 2]))  # (2, 4)
+print(next_smallest_and_largest([]))              # (None, None)
+print(next_smallest_and_largest([1, 1]))          # (None, None)
+print(next_smallest_and_largest([-1, -2, -3, -4, -5]))  # (-4, -2)
+```
+
+### Explanation:
+1. **Initialization**: We initialize `smallest`, `second_smallest`, `largest`, and `second_largest` to extreme values (`float('inf')` and `float('-inf')`) to ensure any number in the list will update these values.
+2. **Iteration**: We iterate through the list once, updating the smallest and largest values as well as their respective second values.
+3. **Condition Checks**: We ensure that the second smallest and second largest values are only updated if the current number is different from the smallest and largest values respectively.
+4. **Final Check**: After the loop, we check if the second smallest and second largest values are still at their initial extreme values. If they are, it means there were not enough distinct elements to determine these values, so we set them to `None`.
+
+This approach ensures that the function runs in O(n) time complexity and does not sort the list, adhering to the given requirements.
