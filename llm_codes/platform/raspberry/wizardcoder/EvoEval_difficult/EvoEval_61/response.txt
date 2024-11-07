@@ -1,0 +1,20 @@
+Here is a Python solution using a stack data structure:
+
+```python
+def correct_bracketing(brackets: str) -> bool:
+    stack = []
+    bracket_pairs = {')': '(', '}': '{', ']':'['}
+
+    for bracket in brackets:
+        if bracket in bracket_pairs:
+            if stack and bracket_pairs[bracket] == stack[-1]:
+                stack.pop()
+            else:
+                return False
+        else:
+            stack.append(bracket)
+
+    return not stack
+```
+
+This function works by iterating over the input string. If the current character is a closing bracket, it checks if the stack is not empty and the top element of the stack is the corresponding opening bracket. If these conditions are met, it pops the top element from the stack. If the current character is an opening bracket, it simply pushes it onto the stack. At the end of the function, it checks if the stack is empty. If it is, it means that every opening bracket has a corresponding closing bracket and the brackets are correctly nested. If the stack is not empty, it means that there are some unmatched opening brackets. 

@@ -1,0 +1,17 @@
+def below_above_threshold(l: list, t1: int, t2: int, s: str):
+    if s == 'below':
+        for i in range(len(l)):
+            if l[i] >= t1:
+                return i
+        return True
+    elif s == 'above':
+        for i in range(len(l)):
+            if l[i] <= t2:
+                return i
+        return True
+    else:
+        return -1
+
+print(below_above_threshold([110, 220, 440, 1100], 1000, 0, 'below'))
+print(below__above_threshold([1100, 2200, 44400, 111000],], 55, 0, 'aboveabove'))
+print(below_above_threshold([11000, 22200, 33000, 440000],], 55, 1155, 'aboveabove'))
