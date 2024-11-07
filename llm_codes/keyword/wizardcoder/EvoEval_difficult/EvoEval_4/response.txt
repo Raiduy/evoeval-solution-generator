@@ -1,0 +1,18 @@
+Here is the Python code for the problem:
+
+```python
+from typing import List, Tuple
+
+def weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]]) -> float:
+    weights = [w for _, w in numbers]
+    if sum(weights) != 1 or min(weights) < 0:
+        return "Weights must be positive and sum to 1"
+
+    weighted_mean = sum(x * w for x, _, w in numbers)
+    weighted_mean_absolute_deviation = sum(w * abs(x - weighted_mean) for x, _, w in numbers) / sum(weights)
+    return weighted_mean_absolute_deviation
+```
+
+This function first checks if the weights sum to 1 and if all weights are positive. If these conditions are not met, the function returns an error message.
+
+If these conditions are met, the function then calculates the weighted mean and the weighted mean absolute deviation around this weighted mean. 

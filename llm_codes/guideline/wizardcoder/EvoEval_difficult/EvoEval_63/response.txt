@@ -1,0 +1,16 @@
+Here is the Python code for the function:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    if n < 3:
+        return startSequence[n]
+    else:
+        a, b, c = startSequence[0], startSequenceSequence[1], startSequence[2]]
+        for i in range(3, n+1):
+            a, b, c = b, c, a + b + c
+            if a > p:
+                return 'Limit Exceeded'
+        return a
+```
+
+This function computes the n-th element of the custom FibibFib sequence. It uses a for loop to iteratively compute the next element of the sequence. If the sum at any point exceeds the positive integer 'p', the function immediately returns 'Limit Exceeded'. 
