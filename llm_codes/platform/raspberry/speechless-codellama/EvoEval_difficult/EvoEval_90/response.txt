@@ -1,0 +1,31 @@
+
+
+```python
+def next_smallest_and_largest(lst):
+    smallest = float('inf')
+    second_smallest = float('inf')
+    largest = float('-inf')
+    second_largest = float('-inf')
+
+    for num in lst:
+        if num < smallest:
+            second_smallest = smallest
+            smallest = num
+        elif num < second_smallest and num != smallest:
+            second_smallest = num
+
+        if num > largest:
+            second_largest = largest
+            largest = num
+        elif num > second_largest and num != largest:
+            second_largest = num
+
+    if second_smallest == float('inf') or second_largest == float('-inf'):
+        return None, None
+    else:
+        return second_smallest, second_largest
+```
+
+This function iterates through the list and keeps track of the smallest, second smallest, largest, and second largest elements. It checks if the current element is smaller or larger than the smallest or largest elements, and updates them accordingly. If the current element is equal to the smallest or largest element, it is skipped to avoid duplicates.
+
+After iterating through the list, the function checks if the second smallest or second largest element is still set to infinity (or negative infinity), indicating that there was no such element in the list. If so, it returns None for that element. Otherwise, it returns the second smallest and second largest elements as a tuple.

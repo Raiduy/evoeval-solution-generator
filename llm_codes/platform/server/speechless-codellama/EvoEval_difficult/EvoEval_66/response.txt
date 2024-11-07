@@ -1,0 +1,24 @@
+
+
+```python
+def advancedDigitSum(s, t):
+    sum_s = 0
+    sum_t = 0
+    for char in s:
+        if char.isupper():
+            sum_s += ord(char)
+    for char in t:
+        if char.islower():
+            sum_t += ord(char)
+    return (sum_s, sum_t)
+```
+
+Explanation:
+
+The function `advancedDigitSum` takes two strings `s` and `t` as input. It initializes two variables `sum_s` and `sum_t` to 0.
+
+It then iterates over each character in the string `s`. If the character is an uppercase letter, it adds the ASCII code of the character to `sum_s` using the `ord` function.
+
+Similarly, it iterates over each character in the string `t`. If the character is a lowercase letter, it adds the ASCII code of the character to `sum_t` using the `ord` function.
+
+Finally, it returns a tuple containing the sums of `sum_s` and `sum_t`.

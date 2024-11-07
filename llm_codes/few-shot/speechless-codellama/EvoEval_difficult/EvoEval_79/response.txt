@@ -1,0 +1,20 @@
+
+
+Here's an implementation of the `decimal_to_binary` function that should be energy efficient:
+
+```python
+def decimal_to_binary(decimal, padding_length):
+    if not isinstance(decimal, int) or not isinstance(padding_length, int) or decimal < 0 or padding_length < 0:
+        return "Invalid Input"
+    binary = bin(decimal)[2:]
+    if len(binary) > padding_length:
+        return "Padding length is too small"
+    binary = binary.zfill(padding_length)
+    return f"db{binary}db"
+```
+
+This implementation first checks if the input is valid, i.e., if `decimal` and `padding_length` are both integers and non-negative. If either of them is invalid, it returns an error message.
+
+Next, it converts `decimal` to binary using the built-in `bin` function and removes the '0b' prefix that `bin` adds. It then checks if the length of the binary string is greater than `padding_length`. If it is, it returns an error message.
+
+If the binary string is not too long, it pads it with zeros using the `zfill` method and returns the final string with the 'db' prefix and suffix added.

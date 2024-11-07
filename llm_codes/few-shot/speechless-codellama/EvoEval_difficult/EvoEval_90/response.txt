@@ -1,0 +1,33 @@
+
+
+```python
+def next_smallest_and_largest(lst):
+    smallest = largest = None
+    second_smallest = second_largest = None
+    for num in lst:
+        if smallest is None or num < smallest:
+            second_smallest = smallest
+            smallest = num
+        elif second_smallest is None or num < second_smallest and num != smallest:
+            second_smallest = num
+        if largest is None or num > largest:
+            second_largest = largest
+            largest = num
+        elif second_largest is None or num > second_largest and num != largest:
+            second_largest = num
+    return (second_smallest, second_largest)
+```
+
+Explanation:
+
+We initialize four variables: smallest, largest, second_smallest, and second_largest. We iterate through the list and update these variables accordingly.
+
+If the current number is smaller than the smallest number we've seen so far, we update the second_smallest variable to be the smallest number we've seen so far, and update the smallest variable to be the current number.
+
+If the current number is smaller than the second_smallest number we've seen so far and is not equal to the smallest number, we update the second_smallest variable to be the current number.
+
+If the current number is larger than the largest number we've seen so far, we update the second_largest variable to be the largest number we've seen so far, and update the largest variable to be the current number.
+
+If the current number is larger than the second_largest number we've seen so far and is not equal to the largest number, we update the second_largest variable to be the current number.
+
+Finally, we return a tuple of the second_smallest and second_largest variables.

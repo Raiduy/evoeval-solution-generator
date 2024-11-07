@@ -1,0 +1,15 @@
+
+
+```python
+def count_distinct_characters_substrings(string: str, length: int) -> dict:
+    if length > len(string):
+        return {}
+    result = {}
+    for i in range(len(string) - length + 1):
+        substring = string[i:i+length]
+        distinct_chars = set(substring)
+        result[substring] = len(distinct_chars)
+    return result
+```
+
+This code first checks if the length is greater than the string length, and returns an empty dictionary if it is. Then, it loops through each substring of the given length and calculates the number of distinct characters in that substring using a set. The result is stored in a dictionary with the substring as the key and the count of distinct characters as the value. Finally, the dictionary is returned.

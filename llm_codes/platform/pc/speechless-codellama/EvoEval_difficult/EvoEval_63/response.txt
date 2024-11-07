@@ -1,0 +1,24 @@
+
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    if n == 0:
+        return startSequence[0]
+    elif n == 1:
+        return startSequence[1]
+    elif n == 2:
+        return startSequence[2]
+    else:
+        a, b, c = startSequence
+        for i in range(3, n+1):
+            a, b, c = b, c, a+b+c
+            if c > p:
+                return 'Limit Exceeded'
+        return c
+```
+
+Explanation:
+
+The function `customFibFib` takes three arguments: `n` (the index of the sequence to compute), `startSequence` (a list of three starting values), and `p` (the maximum sum allowed).
+
+If `n` is 0, 1, or 2, the function returns the corresponding value from `startSequence`. Otherwise, the function initializes `a`, `b`, and `c` to the first, second, and third values of `startSequence`, respectively. It then enters a loop that runs from 3 to `n`, computing the next value of `c` as the sum of `a`, `b`, and `c`, and updating `a`, `b`, and `c` accordingly. If the value of `c` exceeds `p`, the function immediately returns `'Limit Exceeded'`. Otherwise, the function returns the final value of `c`.

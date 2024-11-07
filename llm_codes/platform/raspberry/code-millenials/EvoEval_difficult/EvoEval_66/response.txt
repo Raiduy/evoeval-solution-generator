@@ -1,0 +1,11 @@
+ def advancedDigitSum(s, t):
+    sum_s = sum(ord(c) for c in s if c.isupper())
+    sum_t = sum(ord(c) for c in t if c.islower())
+    return (sum_s, sum_t)
+
+print(advancedDigitSum("", "abc"))
+print(advancedDigitSum("abAB", "abc"))
+print(advancedDigitSum("abcCd", ""))
+print(advancedDigitSum("helloE", "abc"))
+print(advancedDigitSum("woArBld", "xyz"))
+print(advancedDigitSum("aAaaaXa", ",.!"))

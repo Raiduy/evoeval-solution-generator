@@ -1,0 +1,21 @@
+ Here is a Python solution that uses dynamic programming to efficiently compute the n-th element of the CustomFibFib sequence:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    if n < 3:
+        return startSequence[n]
+
+    sequence = startSequence[:]
+
+    for i in range(3, n+1):
+        next_value = sequence[i-1] + sequence[i-2] + sequence[i-3]
+        if next_value > p:
+            return 'Limit Exceeded'
+        sequence.append(next_value)
+
+    return sequence[-1]
+```
+
+This function first initializes the `sequence` list with the initial values from `startSequence`. Then, it iterates from the 4th element to the n-th element, computing the next value by summing the last three elements in the sequence. If the next value exceeds the limit `p`, it immediately returns 'Limit Exceeded'. Otherwise, it appends the next value to the sequence. Finally, it returns the last element of the sequence, which is the n-th element of the CustomFibFib sequence.
+
+This solution has a time complexity of O(n) and a space complexity of O(n), making it efficient for both performance and resource efficiency.

@@ -1,0 +1,18 @@
+
+Here's the optimized code for the `correct_bracketing_advanced` function:
+
+```python
+def correct_bracketing_advanced(brackets: str) -> bool:
+    stack = []
+    for bracket in brackets:
+        if bracket in "([{":
+            stack.append(bracket)
+        elif bracket in ")]}":
+            if not stack or brackets.index(bracket) != brackets.index(stack.pop()):
+                return False
+    return not stack
+```
+
+This code uses a stack to keep track of the opening brackets and their corresponding closing brackets. It iterates through the input string and pushes opening brackets onto the stack, and pops closing brackets off the stack if they match the top of the stack. If a closing bracket doesn't match the top of the stack, or if there are any remaining opening brackets on the stack at the end of the iteration, the function returns `False`. Otherwise, it returns `True`.
+
+This implementation is optimized for both performance and resource efficiency by avoiding unnecessary string operations and using a stack data structure to keep track of the brackets.

@@ -1,0 +1,39 @@
+
+
+```python
+def next_smallest_and_largest(lst):
+    smallest = float('inf')
+    second_smallest = float('inf')
+    largest = float('-inf')
+    second_largest = float('-inf')
+
+    for num in lst:
+        if num < smallest:
+            second_smallest = smallest
+            smallest = num
+        elif num < second_smallest and num != smallest:
+            second_smallest = num
+
+        if num > largest:
+            second_largest = largest
+            largest = num
+        elif num > second_largest and num != largest:
+            second_largest = num
+
+    if second_smallest == float('inf') or second_largest == float('-inf'):
+        return None, None
+    else:
+        return second_smallest, second_largest
+```
+
+Explanation:
+
+The function `next_smallest_and_largest` takes a list of integers as input and returns a tuple of the 2nd smallest and the 2nd largest elements of the list. If there is no such element, it returns `None`.
+
+The function initializes four variables: `smallest`, `second_smallest`, `largest`, and `second_largest` to `float('inf')` and `-float('inf')` respectively. These variables will keep track of the smallest, 2nd smallest, largest, and 2nd largest elements in the list.
+
+The function then iterates over each element in the list. If the current element is smaller than the current smallest element, it updates the `second_smallest` and `smallest` variables. If the current element is between the smallest and second smallest elements, it updates the `second_smallest` variable.
+
+Similarly, if the current element is larger than the current largest element, it updates the `second_largest` and `largest` variables. If the current element is between the largest and second largest elements, it updates the `second_largest` variable.
+
+After iterating over all the elements in the list, the function checks if either `second_smallest` or `second_largest` is still equal to `float('inf')` or `-float('inf')` respectively. If either of them is still equal to these values, it means that there is no 2nd smallest or 2nd largest element in the list, so the function returns `None, None`. Otherwise, it returns the `second_smallest` and `second_largest` variables as a tuple.
