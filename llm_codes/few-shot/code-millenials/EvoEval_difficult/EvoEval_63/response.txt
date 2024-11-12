@@ -1,0 +1,22 @@
+ Here is a Python solution using a dictionary to store previously computed values, which significantly speeds up the computation:
+
+```python
+def customFibFib(n, startSequence, p):
+    # Create a dictionary to store computed values
+    computed = {i: val for i, val in enumerate(startSequence)}
+
+    for i in range(len(startSequence), n + 1):
+        # Compute the next value
+        next_val = computed[i - 1] + computed[i - 2] + computed[i - 3]
+
+        # Check if the sum exceeds 'p'
+        if next_val > p:
+            return 'Limit Exceeded'
+
+        # Update the dictionary
+        computed[i] = next_val
+
+    return computed[n]
+```
+
+This function uses the same logic as the Fibonacci sequence, but with a base case that depends on three preceding values instead of two. It stores the previously computed values in a dictionary and checks whether the sum exceeds 'p' at each step. If the sum exceeds 'p', it immediately returns 'Limit Exceeded'. If the function completes without exceeding 'p', it returns the n-th value of the sequence.

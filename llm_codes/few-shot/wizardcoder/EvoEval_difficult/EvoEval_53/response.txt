@@ -1,0 +1,10 @@
+def add_elements(list1: list, list2: list, index: int):
+    try:
+        result = list1[index] + list2[index]
+        return result, False
+    except IndexError:
+        return None, True
+
+# Test cases
+print(add_elements([1, 2, 3], [4, 5, 6], 1))  # Expected output: (7, False)
+print(add_elements([10, 20, 300], [440, 5500], 2))  # Expected output: (None, True) 

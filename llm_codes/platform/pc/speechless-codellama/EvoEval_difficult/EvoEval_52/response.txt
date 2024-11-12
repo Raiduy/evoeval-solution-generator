@@ -1,0 +1,29 @@
+
+
+```python
+def below_above_threshold(l: list, t1: int, t2: int, s: str) -> Union[bool, int]:
+    if s == 'below':
+        for i, num in enumerate(l):
+            if num >= t1:
+                return i
+        return True
+    elif s == 'above':
+        for i, num in enumerate(l):
+            if num <= t2:
+                return i
+        return True
+    else:
+        return -1
+```
+
+Explanation:
+
+The function `below_above_threshold` takes four arguments: a list `l`, two integers `t1` and `t2`, and a string `s`. The function returns a boolean value or an integer depending on the condition specified in the string `s`.
+
+If `s` is 'below', the function iterates through the list `l` and checks if each number is below the threshold `t1`. If any number is not below the threshold, the function returns the index of the first element that violates the condition. If all numbers are below the threshold, the function returns `True`.
+
+If `s` is 'above', the function iterates through the list `l` and checks if each number is above the threshold `t2`. If any number is not above the threshold, the function returns the index of the first element that violates the condition. If all numbers are above the threshold, the function returns `True`.
+
+If `s` is neither 'below' nor 'above', the function returns `-1`.
+
+The function uses the `enumerate` function to iterate through the list `l` and keep track of the index of each element. The `Union` type hint is used to indicate that the function can return either a boolean value or an integer.

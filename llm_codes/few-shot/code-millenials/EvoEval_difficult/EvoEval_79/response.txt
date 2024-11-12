@@ -1,0 +1,17 @@
+ Here is a Python solution for the problem:
+
+```python
+def decimal_to_binary(decimal, padding_length):
+    if not isinstance(decimal, int) or not isinstance(padding_length, int):
+        return "Invalid Input"
+    if decimal < 0 or padding_length < 0:
+        return "Invalid Input"
+    binary = bin(decimal)[2:]
+    if len(binary) > padding_length:
+        return "Padding length is too small"
+    return "db" + binary.zfill(padding_length) + "db"
+```
+
+This function first checks if the inputs are valid. If not, it returns an error message. Then it uses the built-in bin function to convert the decimal number to binary. The [2:] slice is used to remove the '0b' prefix that bin returns.
+
+If the length of the binary number is greater than the padding_length, the function returns an error message. Otherwise, it pads the binary number with zeros at the beginning to reach the padding_length and returns the final result.

@@ -19,6 +19,8 @@ else
         mkdir -p ./$1/$2/retries/
         python3 llm_code_getter.py $1 $2 $3 >> ./$1/$2/retries/$3.log
         rm -f ./$1/$2/EvoEval_difficult/eval_results.json
+        echo "Sleeping for code check ..."
+        sleep 20
         python3 ../../evoeval/evoeval/evaluate.py --dataset EvoEval_difficult --samples ./$1/$2/EvoEval_difficult/ | grep 'pass' >> ./$1/$2/retries/$3.log
         echo $( tail -n 1 ./$1/$2/retries/$3.log )
         

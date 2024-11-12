@@ -1,0 +1,19 @@
+Here is the Python code that fulfills the requirements:
+
+```python
+def decimal_to_binary(decimal, padding_length):
+    if not isinstance(decimal, int) or not isinstance(padding_length, int) or decimal < 0 or padding_length < 0:
+        return "Invalid Input"
+    binary = bin(decimal)[2:]
+    if len(binary) > padding_length:
+        return "Padding length is too small"
+    return "0"*(padding_length-len(binary)) + binary
+```
+
+This function first checks if the inputs are valid. If not, it returns an error message.
+
+Then, it converts the decimal number to its binary representation.
+
+After that, it checks if the length of the binary number representation is greater than the required padding_length. If it is, it returns an error message.
+
+Finally, it pads the binary number representation with '0's at the beginning to reach the required padding_length, and returns the resulting string. 

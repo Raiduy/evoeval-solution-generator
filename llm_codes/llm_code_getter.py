@@ -1,4 +1,3 @@
-from dataclasses import replace
 import os
 import json
 import sys
@@ -15,24 +14,36 @@ models = {
     'deepseek-coder': "deepseek-coder",
     'gpt-4': "gpt-4",
     'chatgpt': "gpt-3.5-turbo",
+    'wizardcoder': "wizardcoder-33b-v1-1-raq",
 }
 
 hf_prompt_template = """{sys_prompt}
 
 ### Instruction: {user_prompt}
 
-### Response:
-"""
+### Response:"""
+
+hf_wizard_prompt_template = "{sys_prompt}\n\n### Instruction:\n{user_prompt}\n\n### Response:"
 
 
 def preprocess_response(llm, response, user_prompt):
+    function_name = user_prompt.split('def ')[1].split('\n')[0]
+    
+    print('Function name:', function_name)
+
     if '```python' in response:
         response = response.split('```python')[1].split('```')[0]
-    else:
-        if llm == 'code-millenials':
-            response = user_prompt + '\n' + response.split('if __name__')[0]
-        elif llm == 'speechless-codellama':
-            response = user_prompt + '\n' + response
+    #else:
+    #    if llm == 'code-millenials':
+    #        response = user_prompt + '\n' + response.split('if __name__')[0]
+    #    elif llm == 'speechless-codellama':
+    #        response = user_prompt + '\n' + response
+
+    if ' def' in response:
+        response = response.replace(' def', 'def')
+
+    if response.count(f'\ndef {function_name}') > 1:
+        response = response.split(f'\ndef {function_name}')[1].split('\n')[1]
 
     if user_prompt.split(':\n')[0] not in response:
         response = user_prompt.split('\n')[0] + '\n' + response
@@ -100,10 +111,13 @@ def prompt_builder(experiment, model, problem_id, prompts_data):
         ]
     elif model == 'code-millenials':
         prompt = hf_prompt_template.format(sys_prompt=sys_prompt, 
-                                            user_prompt=user_prompt)
+                                            user_prompt=user_prompt+'\n')
     elif model == 'speechless-codellama':
         prompt = hf_prompt_template.format(sys_prompt=sys_prompt, 
-                                            user_prompt='\n'+user_prompt)
+                                            user_prompt='\n'+user_prompt+'\n')
+    elif model == 'wizardcoder':
+        prompt = hf_wizard_prompt_template.format(sys_prompt=sys_prompt, 
+                                            user_prompt=user_prompt)
     else:
         return "Broken"
 

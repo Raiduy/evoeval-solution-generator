@@ -1,0 +1,19 @@
+
+
+```python
+def below_above_threshold(l: list, t1: int, t2: int, s: str) -> Union[bool, int]:
+    if s == 'below':
+        for i, num in enumerate(l):
+            if num >= t1:
+                return i
+        return True
+    elif s == 'above':
+        for i, num in enumerate(l):
+            if num <= t2:
+                return i
+        return True
+    else:
+        return -1
+```
+
+This code checks if all numbers in the list `l` are below or above the thresholds `t1` and `t2` respectively, depending on the value of `s`. If any number is not according to the condition, it returns the index of the first element that violates the condition. If `s` is neither 'below' nor 'above', it returns -1.

@@ -1,0 +1,19 @@
+
+
+```python
+def below_above_threshold(l: list, t1: int, t2: int, s: str):
+    if s == 'below':
+        for i, num in enumerate(l):
+            if num >= t1:
+                return i
+        return True
+    elif s == 'above':
+        for i, num in enumerate(l):
+            if num <= t2:
+                return i
+        return True
+    else:
+        return -1
+```
+
+This implementation uses a for loop to iterate over the list `l` and check if each element is below or above the threshold `t1` or `t2`, respectively. If an element violates the condition, the function returns the index of that element. If all elements satisfy the condition, the function returns `True`. If `s` is neither `'below'` nor `'above'`, the function returns `-1`.

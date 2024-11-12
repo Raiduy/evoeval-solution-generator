@@ -1,0 +1,17 @@
+Here is a Python solution for the problem:
+
+```python
+def customFibFib(n: int, startSequence: list, p: int):
+    if n < len(startSequence):
+        return startSequence[n]
+    sequence = startSequenceSequence + [0] * (n - len(startSequence) + 1)
+    for i in range(len(startSequence), n + 1):
+        sequence[i] = sum(sequence[i-j] for j in range(1, 4))
+        if sequence[i] > p:
+            return 'Limit Exceeded'
+    return sequence[n]
+```
+
+This function first checks if the n-th element is within the initial sequence. If it is, it simply returns that element.
+
+If the n-th element is not within the initial sequence, it then generates the rest of the sequence up to the n-th element. During this generation process, if the sum at any point exceeds the positive integer 'p', the function immediately returns 'Limit Exceeded' without continuing the computation. 

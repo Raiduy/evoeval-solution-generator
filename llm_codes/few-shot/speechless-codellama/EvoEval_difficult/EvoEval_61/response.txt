@@ -1,0 +1,22 @@
+
+
+```python
+def correct_bracketing_advanced(brackets: str):
+    stack = []
+    for bracket in brackets:
+        if bracket in "([{":
+            stack.append(bracket)
+        else:
+            if not stack:
+                return False
+            if bracket == ")" and stack[-1] != "(":
+                return False
+            if bracket == "]" and stack[-1] != "[":
+                return False
+            if bracket == "}" and stack[-1] != "{":
+                return False
+            stack.pop()
+    return not stack
+```
+
+This implementation uses a stack to keep track of the opening brackets. When an opening bracket is encountered, it is pushed onto the stack. When a closing bracket is encountered, the top of the stack is popped and checked to see if it matches the closing bracket. If it does not match, the function returns False. If the stack is not empty at the end of the loop, the function also returns False. This implementation has a time complexity of O(n), where n is the length of the input string.

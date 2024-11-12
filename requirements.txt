@@ -1,4 +1,6 @@
 pandas
 fsspec
 huggingface_hub
+openai
+python-dotenv
 
