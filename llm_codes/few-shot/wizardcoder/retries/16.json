@@ -1,0 +1,546 @@
+{
+    "eval": {
+        "EvoEval/66": [
+            {
+                "task_id": "EvoEval/66",
+                "solution": "\ndef advancedDigitSum(s, t):\n    sum_s = 0\n    sum_t = 0\n\n    for char in s:\n        if char.isupper():\n            sum_s += ord(char)\n\n    for char in t:\n        if char.islower():\n            sum_t += ord(char)\n\n    return sum_s, sum_t\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/53": [
+            {
+                "task_id": "EvoEval/53",
+                "solution": "def add_elements(list1: list, list2: list, index: int):\n    try:\n        result = list1[index] + list2[index]\n        return result, False\n    except IndexError:\n        return None, True\n\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/63": [
+            {
+                "task_id": "EvoEval/63",
+                "solution": "\ndef customFibFib(n: int, startSequence: list, p: int) -> int:\n    # Initialize a dictionary to store the computed values of the sequence\n    computed_values = {0: startSequence[0]}, 1: {1: startSequenceSequence[1]}}\n\n    # Iteratively compute the n-th element of the sequence\n    for i in range(2, n + 1):\n        computed_values[i] = {}\n        for j in range(i - 3, i - 1):\n            if computed_values[j] + computed_values[j + 1] + computed_values[jj + 2] > p:\n                return 'Limit Exceeded'\n            computed_values[i][j] = computed_values[j][j] + computed_values[jj + 1] + computed_values[jjj + 2]\n\n    return computed_values[n][0]\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/52": [
+            {
+                "task_id": "EvoEval/52",
+                "solution": "def below_above_threshold(l: list, t1: int, t2: int, s: str):\n    if s == 'below':\n        for i, num in enumerate(l):\n            if num >= t1:\n                return i\n        return True\n    elif s == 'aboveabove':\n        for i, num in enumerate(l):\n            if num <= t2:\n                return i\n        return True\n    else:\n        return -1\n\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        [
+                            1,
+                            20,
+                            4,
+                            10
+                        ],
+                        5,
+                        0,
+                        "above"
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/4": [
+            {
+                "task_id": "EvoEval/4",
+                "solution": "\nfrom typing import List, Tuple\n\ndef weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:\n    # Check if weights sum to 1\n    if sum(w for _, w in numbers) != 1:\n        return \"Weights must be positive and sum to 1\"\n\n    # Calculate the weighted mean\n    weighted_mean = sum(x * w for x, w in numbers)\n\n    # Calculate the Weighted Mean Absolute Deviation\n    weighted_mean_abs_deviation = sum(w * abs(x - weighted_mean) for x, w in numbers) / sum(w for _, w in numbers)\n\n    return weighted_mean_abs_deviation\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/61": [
+            {
+                "task_id": "EvoEval/61",
+                "solution": "def correct_bracketing_advanced(brackets: str):\n    stack = []\n    for bracket in brackets:\n        if bracket == '(' or bracket == '[' or bracket == '{':\n            stack.append(bracket)\n        elif bracket == ')' or bracket == ']' or bracket == '}':\n            if not stack:\n                return False\n            top_element = stack.pop()\n            if bracket == ')' and top_element != '(':\n                return False\n            if bracket == ']' and top_element != '[':\n                return False\n            if bracket == '}' and top_element != '{':\n                return False\n    if stack:\n        return False\n    return True \n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/16": [
+            {
+                "task_id": "EvoEval/16",
+                "solution": "def count_distinct_characters_substrings(string: str, length: int) -> dict:\n    if length > len(string):\n        return {}\n    result = {}\n    for i in range(len(string)):\n        substring = string[i:i+length]\n        if len(substring) < length:\n            break\n        distinct_characters = len(set(substring))\n        result[substring] = distinct_characters\n    return result\n\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        "",
+                        0
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ]
+    }
+}
+{
+    "eval": {
+        "EvoEval/4": [
+            {
+                "task_id": "EvoEval/4",
+                "solution": "\nfrom typing import List, Tuple\n\ndef weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:\n    # Check if weights sum to 1\n    if sum(w for _, w in numbers) != 1:\n        return \"Weights must be positive and sum to 1\"\n\n    # Calculate the weighted mean\n    weighted_mean = sum(x * w for x, w in numbers)\n\n    # Calculate the Weighted Mean Absolute Deviation\n    weighted_mean_abs_deviation = sum(w * abs(x - weighted_mean) for x, w in numbers) / sum(w for _, w in numbers)\n\n    return weighted_mean_abs_deviation\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/52": [
+            {
+                "task_id": "EvoEval/52",
+                "solution": "def below_above_threshold(l: list, t1: int, t2: int, s: str):\n    if s == 'below':\n        for i, num in enumerate(l):\n            if num >= t1:\n                return i\n        return True\n    elif s == 'aboveabove':\n        for i, num in enumerate(l):\n            if num <= t2:\n                return i\n        return True\n    else:\n        return -1\n\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        [
+                            1,
+                            20,
+                            4,
+                            10
+                        ],
+                        5,
+                        0,
+                        "above"
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/53": [
+            {
+                "task_id": "EvoEval/53",
+                "solution": "def add_elements(list1: list, list2: list, index: int):\n    try:\n        result = list1[index] + list2[index]\n        return result, False\n    except IndexError:\n        return None, True\n\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/66": [
+            {
+                "task_id": "EvoEval/66",
+                "solution": "\ndef advancedDigitSum(s, t):\n    sum_s = 0\n    sum_t = 0\n\n    for char in s:\n        if char.isupper():\n            sum_s += ord(char)\n\n    for char in t:\n        if char.islower():\n            sum_t += ord(char)\n\n    return sum_s, sum_t\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/63": [
+            {
+                "task_id": "EvoEval/63",
+                "solution": "\ndef customFibFib(n: int, startSequence: list, p: int) -> int:\n    # Initialize a dictionary to store the computed values of the sequence\n    computed_values = {0: startSequence[0]}, 1: {1: startSequenceSequence[1]}}\n\n    # Iteratively compute the n-th element of the sequence\n    for i in range(2, n + 1):\n        computed_values[i] = {}\n        for j in range(i - 3, i - 1):\n            if computed_values[j] + computed_values[j + 1] + computed_values[jj + 2] > p:\n                return 'Limit Exceeded'\n            computed_values[i][j] = computed_values[j][j] + computed_values[jj + 1] + computed_values[jjj + 2]\n\n    return computed_values[n][0]\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/61": [
+            {
+                "task_id": "EvoEval/61",
+                "solution": "def correct_bracketing_advanced(brackets: str):\n    stack = []\n    for bracket in brackets:\n        if bracket == '(' or bracket == '[' or bracket == '{':\n            stack.append(bracket)\n        elif bracket == ')' or bracket == ']' or bracket == '}':\n            if not stack:\n                return False\n            top_element = stack.pop()\n            if bracket == ')' and top_element != '(':\n                return False\n            if bracket == ']' and top_element != '[':\n                return False\n            if bracket == '}' and top_element != '{':\n                return False\n    if stack:\n        return False\n    return True \n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/16": [
+            {
+                "task_id": "EvoEval/16",
+                "solution": "def count_distinct_characters_substrings(string: str, length: int) -> dict:\n\n    if length > len(string):\n        return {}\n\n    result = {}\n    for i in range(len(string)):\n        substring = string[i:i+length]\n        if len(substring) < length:\n            break\n\n        distinct_characters = len(set(substring))\n        result[substring] = distinct_characters\n\n    return result\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        "",
+                        0
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ]
+    }
+}
+{
+    "eval": {
+        "EvoEval/66": [
+            {
+                "task_id": "EvoEval/66",
+                "solution": "\ndef advancedDigitSum(s, t):\n    sum_s = 0\n    sum_t = 0\n\n    for char in s:\n        if char.isupper():\n            sum_s += ord(char)\n\n    for char in t:\n        if char.islower():\n            sum_t += ord(char)\n\n    return sum_s, sum_t\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/53": [
+            {
+                "task_id": "EvoEval/53",
+                "solution": "def add_elements(list1: list, list2: list, index: int):\n    try:\n        result = list1[index] + list2[index]\n        return result, False\n    except IndexError:\n        return None, True\n\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/52": [
+            {
+                "task_id": "EvoEval/52",
+                "solution": "def below_above_threshold(l: list, t1: int, t2: int, s: str):\n    if s == 'below':\n        for i, num in enumerate(l):\n            if num >= t1:\n                return i\n        return True\n    elif s == 'aboveabove':\n        for i, num in enumerate(l):\n            if num <= t2:\n                return i\n        return True\n    else:\n        return -1\n\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        [
+                            1,
+                            20,
+                            4,
+                            10
+                        ],
+                        5,
+                        0,
+                        "above"
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/4": [
+            {
+                "task_id": "EvoEval/4",
+                "solution": "\nfrom typing import List, Tuple\n\ndef weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:\n    # Check if weights sum to 1\n    if sum(w for _, w in numbers) != 1:\n        return \"Weights must be positive and sum to 1\"\n\n    # Calculate the weighted mean\n    weighted_mean = sum(x * w for x, w in numbers)\n\n    # Calculate the Weighted Mean Absolute Deviation\n    weighted_mean_abs_deviation = sum(w * abs(x - weighted_mean) for x, w in numbers) / sum(w for _, w in numbers)\n\n    return weighted_mean_abs_deviation\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/63": [
+            {
+                "task_id": "EvoEval/63",
+                "solution": "\ndef customFibFib(n: int, startSequence: list, p: int) -> int:\n    # Initialize a dictionary to store the computed values of the sequence\n    computed_values = {0: startSequence[0]}, 1: {1: startSequenceSequence[1]}}\n\n    # Iteratively compute the n-th element of the sequence\n    for i in range(2, n + 1):\n        computed_values[i] = {}\n        for j in range(i - 3, i - 1):\n            if computed_values[j] + computed_values[j + 1] + computed_values[jj + 2] > p:\n                return 'Limit Exceeded'\n            computed_values[i][j] = computed_values[j][j] + computed_values[jj + 1] + computed_values[jjj + 2]\n\n    return computed_values[n][0]\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/61": [
+            {
+                "task_id": "EvoEval/61",
+                "solution": "def correct_bracketing_advanced(brackets: str):\n    stack = []\n    for bracket in brackets:\n        if bracket == '(' or bracket == '[' or bracket == '{':\n            stack.append(bracket)\n        elif bracket == ')' or bracket == ']' or bracket == '}':\n            if not stack:\n                return False\n            top_element = stack.pop()\n            if bracket == ')' and top_element != '(':\n                return False\n            if bracket == ']' and top_element != '[':\n                return False\n            if bracket == '}' and top_element != '{':\n                return False\n    if stack:\n        return False\n    return True \n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/16": [
+            {
+                "task_id": "EvoEval/16",
+                "solution": "def count_distinct_characters_substrings(string: str, length: int) -> dict:\n\n    if length > len(string):\n        return {}\n\n    result = {}\n    for i in range(len(string)):\n        substring = string[i:i+length]\n        if len(substring) < length:\n            break\n\n        distinct_characters = len(set(substring))\n        result[substring] = distinct_characters\n\n    return result\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        "",
+                        0
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ]
+    }
+}
+{
+    "eval": {
+        "EvoEval/53": [
+            {
+                "task_id": "EvoEval/53",
+                "solution": "def add_elements(list1: list, list2: list, index: int):\n    try:\n        result = list1[index] + list2[index]\n        return result, False\n    except IndexError:\n        return None, True\n\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/63": [
+            {
+                "task_id": "EvoEval/63",
+                "solution": "\ndef customFibFib(n: int, startSequence: list, p: int) -> int:\n    # Initialize a dictionary to store the computed values of the sequence\n    computed_values = {0: startSequence[0]}, 1: {1: startSequenceSequence[1]}}\n\n    # Iteratively compute the n-th element of the sequence\n    for i in range(2, n + 1):\n        computed_values[i] = {}\n        for j in range(i - 3, i - 1):\n            if computed_values[j] + computed_values[j + 1] + computed_values[jj + 2] > p:\n                return 'Limit Exceeded'\n            computed_values[i][j] = computed_values[j][j] + computed_values[jj + 1] + computed_values[jjj + 2]\n\n    return computed_values[n][0]\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/4": [
+            {
+                "task_id": "EvoEval/4",
+                "solution": "\nfrom typing import List, Tuple\n\ndef weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:\n    # Check if weights sum to 1\n    if sum(w for _, w in numbers) != 1:\n        return \"Weights must be positive and sum to 1\"\n\n    # Calculate the weighted mean\n    weighted_mean = sum(x * w for x, w in numbers)\n\n    # Calculate the Weighted Mean Absolute Deviation\n    weighted_mean_abs_deviation = sum(w * abs(x - weighted_mean) for x, w in numbers) / sum(w for _, w in numbers)\n\n    return weighted_mean_abs_deviation\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/66": [
+            {
+                "task_id": "EvoEval/66",
+                "solution": "\ndef advancedDigitSum(s, t):\n    sum_s = 0\n    sum_t = 0\n\n    for char in s:\n        if char.isupper():\n            sum_s += ord(char)\n\n    for char in t:\n        if char.islower():\n            sum_t += ord(char)\n\n    return sum_s, sum_t\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/52": [
+            {
+                "task_id": "EvoEval/52",
+                "solution": "def below_above_threshold(l: list, t1: int, t2: int, s: str):\n    if s == 'below':\n        for i, num in enumerate(l):\n            if num >= t1:\n                return i\n        return True\n    elif s == 'aboveabove':\n        for i, num in enumerate(l):\n            if num <= t2:\n                return i\n        return True\n    else:\n        return -1\n\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        [
+                            1,
+                            20,
+                            4,
+                            10
+                        ],
+                        5,
+                        0,
+                        "above"
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/61": [
+            {
+                "task_id": "EvoEval/61",
+                "solution": "def correct_bracketing_advanced(brackets: str):\n    stack = []\n    for bracket in brackets:\n        if bracket == '(' or bracket == '[' or bracket == '{':\n            stack.append(bracket)\n        elif bracket == ')' or bracket == ']' or bracket == '}':\n            if not stack:\n                return False\n            top_element = stack.pop()\n            if bracket == ')' and top_element != '(':\n                return False\n            if bracket == ']' and top_element != '[':\n                return False\n            if bracket == '}' and top_element != '{':\n                return False\n    if stack:\n        return False\n    return True \n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/16": [
+            {
+                "task_id": "EvoEval/16",
+                "solution": "def count_distinct_characters_substrings(string: str, length: int) -> dict:\n    if length > len(string):\n        return {}\n    result = {}\n    for i in range(len(string)):\n        substring = string[i:i+length]\n        if len(substring) < length:\n            break\n        distinct_characters = len(set(substring))\n        result[substring] = distinct_characters\n    return result\n\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        "",
+                        0
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ]
+    }
+}
+{
+    "eval": {
+        "EvoEval/66": [
+            {
+                "task_id": "EvoEval/66",
+                "solution": "\ndef advancedDigitSum(s, t):\n    sum_s = 0\n    sum_t = 0\n\n    for char in s:\n        if char.isupper():\n            sum_s += ord(char)\n\n    for char in t:\n        if char.islower():\n            sum_t += ord(char)\n\n    return sum_s, sum_t\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/52": [
+            {
+                "task_id": "EvoEval/52",
+                "solution": "def below_above_threshold(l: list, t1: int, t2: int, s: str):\n    if s == 'below':\n        for i, num in enumerate(l):\n            if num >= t1:\n                return i\n        return True\n    elif s == 'aboveabove':\n        for i, num in enumerate(l):\n            if num <= t2:\n                return i\n        return True\n    else:\n        return -1\n\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        [
+                            1,
+                            20,
+                            4,
+                            10
+                        ],
+                        5,
+                        0,
+                        "above"
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/63": [
+            {
+                "task_id": "EvoEval/63",
+                "solution": "\ndef customFibFib(n: int, startSequence: list, p: int) -> int:\n    # Initialize a dictionary to store the computed values of the sequence\n    computed_values = {0: startSequence[0]}, 1: {1: startSequenceSequence[1]}}\n\n    # Iteratively compute the n-th element of the sequence\n    for i in range(2, n + 1):\n        computed_values[i] = {}\n        for j in range(i - 3, i - 1):\n            if computed_values[j] + computed_values[j + 1] + computed_values[jj + 2] > p:\n                return 'Limit Exceeded'\n            computed_values[i][j] = computed_values[j][j] + computed_values[jj + 1] + computed_values[jjj + 2]\n\n    return computed_values[n][0]\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/4": [
+            {
+                "task_id": "EvoEval/4",
+                "solution": "\nfrom typing import List, Tuple\n\ndef weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:\n    # Check if weights sum to 1\n    if sum(w for _, w in numbers) != 1:\n        return \"Weights must be positive and sum to 1\"\n\n    # Calculate the weighted mean\n    weighted_mean = sum(x * w for x, w in numbers)\n\n    # Calculate the Weighted Mean Absolute Deviation\n    weighted_mean_abs_deviation = sum(w * abs(x - weighted_mean) for x, w in numbers) / sum(w for _, w in numbers)\n\n    return weighted_mean_abs_deviation\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/53": [
+            {
+                "task_id": "EvoEval/53",
+                "solution": "def add_elements(list1: list, list2: list, index: int):\n    try:\n        result = list1[index] + list2[index]\n        return result, False\n    except IndexError:\n        return None, True\n\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/61": [
+            {
+                "task_id": "EvoEval/61",
+                "solution": "def correct_bracketing_advanced(brackets: str):\n    stack = []\n    for bracket in brackets:\n        if bracket == '(' or bracket == '[' or bracket == '{':\n            stack.append(bracket)\n        elif bracket == ')' or bracket == ']' or bracket == '}':\n            if not stack:\n                return False\n            top_element = stack.pop()\n            if bracket == ')' and top_element != '(':\n                return False\n            if bracket == ']' and top_element != '[':\n                return False\n            if bracket == '}' and top_element != '{':\n                return False\n    if stack:\n        return False\n    return True \n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/16": [
+            {
+                "task_id": "EvoEval/16",
+                "solution": "def count_distinct_characters_substrings(string: str, length: int) -> dict:\n    if length > len(string):\n        return {}\n    result = {}\n    for i in range(len(string)):\n        substring = string[i:i+length]\n        if len(substring) < length:\n            break\n        distinct_characters = len(set(substring))\n        result[substring] = distinct_characters\n    return result\n\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        "",
+                        0
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ]
+    }
+}
+{
+    "eval": {
+        "EvoEval/52": [
+            {
+                "task_id": "EvoEval/52",
+                "solution": "def below_above_threshold(l: list, t1: int, t2: int, s: str):\n    if s == 'below':\n        for i, num in enumerate(l):\n            if num >= t1:\n                return i\n        return True\n    elif s == 'aboveabove':\n        for i, num in enumerate(l):\n            if num <= t2:\n                return i\n        return True\n    else:\n        return -1\n\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        [
+                            1,
+                            20,
+                            4,
+                            10
+                        ],
+                        5,
+                        0,
+                        "above"
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/63": [
+            {
+                "task_id": "EvoEval/63",
+                "solution": "\ndef customFibFib(n: int, startSequence: list, p: int) -> int:\n    # Initialize a dictionary to store the computed values of the sequence\n    computed_values = {0: startSequence[0]}, 1: {1: startSequenceSequence[1]}}\n\n    # Iteratively compute the n-th element of the sequence\n    for i in range(2, n + 1):\n        computed_values[i] = {}\n        for j in range(i - 3, i - 1):\n            if computed_values[j] + computed_values[j + 1] + computed_values[jj + 2] > p:\n                return 'Limit Exceeded'\n            computed_values[i][j] = computed_values[j][j] + computed_values[jj + 1] + computed_values[jjj + 2]\n\n    return computed_values[n][0]\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/4": [
+            {
+                "task_id": "EvoEval/4",
+                "solution": "\nfrom typing import List, Tuple\n\ndef weighted_mean_absolute_deviation(numbers: List[Tuple[float, float]]) -> float:\n    # Check if weights sum to 1\n    if sum(w for _, w in numbers) != 1:\n        return \"Weights must be positive and sum to 1\"\n\n    # Calculate the weighted mean\n    weighted_mean = sum(x * w for x, w in numbers)\n\n    # Calculate the Weighted Mean Absolute Deviation\n    weighted_mean_abs_deviation = sum(w * abs(x - weighted_mean) for x, w in numbers) / sum(w for _, w in numbers)\n\n    return weighted_mean_abs_deviation\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/66": [
+            {
+                "task_id": "EvoEval/66",
+                "solution": "\ndef advancedDigitSum(s, t):\n    sum_s = 0\n    sum_t = 0\n\n    for char in s:\n        if char.isupper():\n            sum_s += ord(char)\n\n    for char in t:\n        if char.islower():\n            sum_t += ord(char)\n\n    return sum_s, sum_t\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/53": [
+            {
+                "task_id": "EvoEval/53",
+                "solution": "def add_elements(list1: list, list2: list, index: int):\n    try:\n        result = list1[index] + list2[index]\n        return result, False\n    except IndexError:\n        return None, True\n\n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/61": [
+            {
+                "task_id": "EvoEval/61",
+                "solution": "def correct_bracketing_advanced(brackets: str):\n    stack = []\n    for bracket in brackets:\n        if bracket == '(' or bracket == '[' or bracket == '{':\n            stack.append(bracket)\n        elif bracket == ')' or bracket == ']' or bracket == '}':\n            if not stack:\n                return False\n            top_element = stack.pop()\n            if bracket == ')' and top_element != '(':\n                return False\n            if bracket == ']' and top_element != '[':\n                return False\n            if bracket == '}' and top_element != '{':\n                return False\n    if stack:\n        return False\n    return True \n",
+                "base_status": "pass",
+                "plus_status": null,
+                "base_fail_tests": [],
+                "plus_fail_tests": []
+            }
+        ],
+        "EvoEval/16": [
+            {
+                "task_id": "EvoEval/16",
+                "solution": "def count_distinct_characters_substrings(string: str, length: int) -> dict:\n    if length > len(string):\n        return {}\n    result = {}\n    for i in range(len(string)):\n        substring = string[i:i+length]\n        if len(substring) < length:\n            break\n        distinct_characters = len(set(substring))\n        result[substring] = distinct_characters\n    return result\n\n",
+                "base_status": "fail",
+                "plus_status": null,
+                "base_fail_tests": [
+                    [
+                        "",
+                        0
+                    ]
+                ],
+                "plus_fail_tests": []
+            }
+        ]
+    }
+}

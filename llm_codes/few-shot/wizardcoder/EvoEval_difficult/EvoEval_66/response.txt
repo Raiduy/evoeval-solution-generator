@@ -16,4 +16,6 @@ def advancedDigitSum(s, t):
     return sum_s, sum_t
 ```
 
-This function works by iterating over each character in the input strings 's' and 't'. If the character is an uppercase character, its ASCII code is added to the sum for 's'. Similarly, if the character is a lowercase character, its ASCIIII code is added to the sum for 't'. If the character is not an uppercase or lowercase character, it is ignored. The function finally returns a tuple with the two sums. 
+This function works by iterating over each character in the input strings 's' and 't'. If the character is an uppercase character, its ASCII code is added to the sum for 's'. Similarly, if the character is a lowercase character, its ASCII code is added to the sum for 't'.
+
+The function finally returns a tuple with two elements: the sum for 's' and the sum for 't'. 

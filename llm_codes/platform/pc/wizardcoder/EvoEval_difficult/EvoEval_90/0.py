@@ -14,7 +14,7 @@ def next_smallest_and_largest(lst):
             second_largest = second_largest
             largest = num
         elif second_largest < num < largest:
-            second_largest = num # fixed variable
+            second_largest= num # fix wrong variable name
     if second_smallest == float('inf'):
         smallest = None
     if second_largest == float('-inf'):

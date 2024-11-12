@@ -5,4 +5,4 @@ def decimal_to_binary(decimal, padding_length):
     binary = bin(decimal)[2:]
     if len(binary) > padding_length:
         return "Padding length is too small"
-    return "db" + "0" * (padding_length - len(binary)) + binary + "dbdb" # extra )
+    return "0"*(padding_length-len(binary)) + binary
