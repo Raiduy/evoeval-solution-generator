@@ -4,7 +4,7 @@
 #   echo "Error: No arguments provided -- expected: run.sh algo_number"
 #   exit 1
 # else
-algos=(4 61 90)
+algos=(63)
     #algo_number=$1
   for algo_number in "${algos[@]}"; do
     echo "Running algorithm number $algo_number"
