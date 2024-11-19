@@ -95,11 +95,14 @@ def process_llms(solutions_folder, all_llms, device, experiment):
         
         for llm in all_llms:
             code_path = f"./llm_codes/{experiment}/{llm}/EvoEval_difficult/EvoEval_{id}/0.py"
-            with open(code_path) as reader:
-                code = reader.read()
-            num_of_executions = get_num_exec(device, id)
-            final_code = generate_code(function, code, inputs, num_of_executions)
-            export_python_file(f'./{device}/{experiment}/', llm, id, final_code)
+            if os.path.exists(code_path):
+                with open(code_path) as reader:
+                    code = reader.read()
+                num_of_executions = get_num_exec(device, id)
+                final_code = generate_code(function, code, inputs, num_of_executions)
+                export_python_file(f'./{device}/{experiment}/', llm, id, final_code)
+            else:
+                print('ERROR: File does not exist ', code_path)
 
 
 if __name__ == '__main__':
@@ -107,7 +110,7 @@ if __name__ == '__main__':
     device = sys.argv[2]
     experiment = sys.argv[3]
 
-    all_llms = ['gpt-4', 'code-millenials', 'speechless-codellama', 'chatgpt', 'deepseek-coder']
+    all_llms = ['gpt-4', 'code-millenials', 'speechless-codellama', 'chatgpt', 'deepseek-coder', 'wizardcoder']
 
     process_llms(solutions_folder, all_llms, device, experiment)
  
