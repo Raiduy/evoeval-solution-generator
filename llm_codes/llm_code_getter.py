@@ -14,7 +14,7 @@ models = {
     'deepseek-coder': "deepseek-coder",
     'gpt-4': "gpt-4",
     'chatgpt': "gpt-3.5-turbo",
-    'wizardcoder': "wizardcoder-33b-v1-1-jrv",
+    'wizardcoder': "wizardcoder-33b-v1-1-raq",
 }
 
 hf_prompt_template = """{sys_prompt}

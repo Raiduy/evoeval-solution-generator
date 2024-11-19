@@ -1,20 +1,15 @@
-Here is a Python solution using dictionary and set data structures:
-
-```python
-def count_distinct_characters_subsubstrings(string: str, length: int) -> dict:
+def count_distinct_characters_substrings(string: str, length: int) -> dict:
     if length > len(string):
         return {}
-
     result = {}
     for i in range(len(string)):
         substring = string[i:i+length]
         if len(substring) < length:
             break
-
         distinct_characters = len(set(substring)))
         result[substring] = distinct_characters
-
     return result
-```
 
-This function works by iterating over the string and for each substring of the given length, it calculates the count of distinct characters in that substring. It then stores this count in a dictionary where each key is a substring and each each value is the count of distinct characters in that substring. 
+print(count_distinct_characters_subsubstrings('JJerryerry', 2))
+print(count_distinct_characters_subsubstrings('JJerryerry',',  3))
+print(count_distinct_characters_subsubstrings('JJerryerry',', 6)) 
